@@ -27,9 +27,9 @@ function transformarDatos(data) {
             temp: h.temp_c,
             vientoKph: h.wind_kph,
             presionMb: h.pressure_mb,
-            precipitMm: h.precip_mm,
+            lluvia: Math.trunc(h.precip_mm) > 1 ? 1 : 0,
             humedad: h.humidity,
-            sensacion: h.feelslike_c
+            nubes: h.cloud,
         }))
     }));
 }

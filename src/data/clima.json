@@ -1,0 +1,1999 @@
+{
+  "ciudad": "Roldanillo",
+  "region": "Valle del Cauca",
+  "pais": "Colombia",
+  "lecturas": [
+    {
+      "id": 0,
+      "fecha": "2025-05-27",
+      "temperaturaMax": 19.9,
+      "temperaturaMin": 16.2,
+      "precipitacion": 10.92,
+      "horas": [
+        {
+          "id": 0,
+          "hora": "00:00",
+          "temp": 17.2,
+          "vientoKph": 2.9,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 61
+        },
+        {
+          "id": 1,
+          "hora": "01:00",
+          "temp": 17.2,
+          "vientoKph": 3.2,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 97,
+          "nubes": 64
+        },
+        {
+          "id": 2,
+          "hora": "02:00",
+          "temp": 17.1,
+          "vientoKph": 3.2,
+          "presionMb": 1014,
+          "lluvia": 0,
+          "humedad": 97,
+          "nubes": 72
+        },
+        {
+          "id": 3,
+          "hora": "03:00",
+          "temp": 17,
+          "vientoKph": 2.9,
+          "presionMb": 1014,
+          "lluvia": 0,
+          "humedad": 97,
+          "nubes": 74
+        },
+        {
+          "id": 4,
+          "hora": "04:00",
+          "temp": 17,
+          "vientoKph": 2.5,
+          "presionMb": 1014,
+          "lluvia": 0,
+          "humedad": 97,
+          "nubes": 71
+        },
+        {
+          "id": 5,
+          "hora": "05:00",
+          "temp": 17.1,
+          "vientoKph": 2.5,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 97,
+          "nubes": 76
+        },
+        {
+          "id": 6,
+          "hora": "06:00",
+          "temp": 17,
+          "vientoKph": 2.5,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 97,
+          "nubes": 88
+        },
+        {
+          "id": 7,
+          "hora": "07:00",
+          "temp": 17.3,
+          "vientoKph": 2.2,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 97,
+          "nubes": 84
+        },
+        {
+          "id": 8,
+          "hora": "08:00",
+          "temp": 17.9,
+          "vientoKph": 1.8,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 76
+        },
+        {
+          "id": 9,
+          "hora": "09:00",
+          "temp": 19.3,
+          "vientoKph": 2.5,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 92,
+          "nubes": 65
+        },
+        {
+          "id": 10,
+          "hora": "10:00",
+          "temp": 19.9,
+          "vientoKph": 3.2,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 91,
+          "nubes": 76
+        },
+        {
+          "id": 11,
+          "hora": "11:00",
+          "temp": 19.1,
+          "vientoKph": 2.9,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 95,
+          "nubes": 74
+        },
+        {
+          "id": 12,
+          "hora": "12:00",
+          "temp": 18.4,
+          "vientoKph": 1.8,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 97,
+          "nubes": 85
+        },
+        {
+          "id": 13,
+          "hora": "13:00",
+          "temp": 18.7,
+          "vientoKph": 2.2,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 95,
+          "nubes": 73
+        },
+        {
+          "id": 14,
+          "hora": "14:00",
+          "temp": 19,
+          "vientoKph": 1.8,
+          "presionMb": 1013,
+          "lluvia": 0,
+          "humedad": 93,
+          "nubes": 64
+        },
+        {
+          "id": 15,
+          "hora": "15:00",
+          "temp": 19.1,
+          "vientoKph": 0.7,
+          "presionMb": 1013,
+          "lluvia": 0,
+          "humedad": 92,
+          "nubes": 56
+        },
+        {
+          "id": 16,
+          "hora": "16:00",
+          "temp": 18.6,
+          "vientoKph": 0.7,
+          "presionMb": 1013,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 76
+        },
+        {
+          "id": 17,
+          "hora": "17:00",
+          "temp": 18.3,
+          "vientoKph": 0,
+          "presionMb": 1013,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 78
+        },
+        {
+          "id": 18,
+          "hora": "18:00",
+          "temp": 17.6,
+          "vientoKph": 2.2,
+          "presionMb": 1014,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 61
+        },
+        {
+          "id": 19,
+          "hora": "19:00",
+          "temp": 17.2,
+          "vientoKph": 3.2,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 56
+        },
+        {
+          "id": 20,
+          "hora": "20:00",
+          "temp": 16.8,
+          "vientoKph": 2.2,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 95,
+          "nubes": 53
+        },
+        {
+          "id": 21,
+          "hora": "21:00",
+          "temp": 16.8,
+          "vientoKph": 1.8,
+          "presionMb": 1017,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 53
+        },
+        {
+          "id": 22,
+          "hora": "22:00",
+          "temp": 16.4,
+          "vientoKph": 3.6,
+          "presionMb": 1017,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 62
+        },
+        {
+          "id": 23,
+          "hora": "23:00",
+          "temp": 16.2,
+          "vientoKph": 2.9,
+          "presionMb": 1017,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 62
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "fecha": "2025-05-28",
+      "temperaturaMax": 26,
+      "temperaturaMin": 15.6,
+      "precipitacion": 8.14,
+      "horas": [
+        {
+          "id": 0,
+          "hora": "00:00",
+          "temp": 16,
+          "vientoKph": 4.3,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 50
+        },
+        {
+          "id": 1,
+          "hora": "01:00",
+          "temp": 15.6,
+          "vientoKph": 5,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 52
+        },
+        {
+          "id": 2,
+          "hora": "02:00",
+          "temp": 15.6,
+          "vientoKph": 4.3,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 95,
+          "nubes": 53
+        },
+        {
+          "id": 3,
+          "hora": "03:00",
+          "temp": 15.7,
+          "vientoKph": 4.3,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 56
+        },
+        {
+          "id": 4,
+          "hora": "04:00",
+          "temp": 16,
+          "vientoKph": 3.2,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 95,
+          "nubes": 50
+        },
+        {
+          "id": 5,
+          "hora": "05:00",
+          "temp": 16.1,
+          "vientoKph": 2.9,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 95,
+          "nubes": 84
+        },
+        {
+          "id": 6,
+          "hora": "06:00",
+          "temp": 16,
+          "vientoKph": 3.6,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 95,
+          "nubes": 52
+        },
+        {
+          "id": 7,
+          "hora": "07:00",
+          "temp": 17.1,
+          "vientoKph": 1.8,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 93,
+          "nubes": 43
+        },
+        {
+          "id": 8,
+          "hora": "08:00",
+          "temp": 18.9,
+          "vientoKph": 1.4,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 87,
+          "nubes": 83
+        },
+        {
+          "id": 9,
+          "hora": "09:00",
+          "temp": 20.6,
+          "vientoKph": 2.5,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 79,
+          "nubes": 88
+        },
+        {
+          "id": 10,
+          "hora": "10:00",
+          "temp": 22.4,
+          "vientoKph": 4.7,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 72,
+          "nubes": 81
+        },
+        {
+          "id": 11,
+          "hora": "11:00",
+          "temp": 23.9,
+          "vientoKph": 4.3,
+          "presionMb": 1014,
+          "lluvia": 0,
+          "humedad": 67,
+          "nubes": 72
+        },
+        {
+          "id": 12,
+          "hora": "12:00",
+          "temp": 25.1,
+          "vientoKph": 4.3,
+          "presionMb": 1012,
+          "lluvia": 0,
+          "humedad": 63,
+          "nubes": 71
+        },
+        {
+          "id": 13,
+          "hora": "13:00",
+          "temp": 25.6,
+          "vientoKph": 3.2,
+          "presionMb": 1011,
+          "lluvia": 0,
+          "humedad": 61,
+          "nubes": 86
+        },
+        {
+          "id": 14,
+          "hora": "14:00",
+          "temp": 26,
+          "vientoKph": 3.2,
+          "presionMb": 1010,
+          "lluvia": 0,
+          "humedad": 58,
+          "nubes": 87
+        },
+        {
+          "id": 15,
+          "hora": "15:00",
+          "temp": 25.7,
+          "vientoKph": 3.2,
+          "presionMb": 1009,
+          "lluvia": 0,
+          "humedad": 59,
+          "nubes": 74
+        },
+        {
+          "id": 16,
+          "hora": "16:00",
+          "temp": 25.1,
+          "vientoKph": 2.5,
+          "presionMb": 1009,
+          "lluvia": 0,
+          "humedad": 64,
+          "nubes": 77
+        },
+        {
+          "id": 17,
+          "hora": "17:00",
+          "temp": 23,
+          "vientoKph": 1.8,
+          "presionMb": 1010,
+          "lluvia": 0,
+          "humedad": 79,
+          "nubes": 72
+        },
+        {
+          "id": 18,
+          "hora": "18:00",
+          "temp": 19.6,
+          "vientoKph": 1.8,
+          "presionMb": 1011,
+          "lluvia": 0,
+          "humedad": 88,
+          "nubes": 82
+        },
+        {
+          "id": 19,
+          "hora": "19:00",
+          "temp": 17.7,
+          "vientoKph": 5.4,
+          "presionMb": 1013,
+          "lluvia": 0,
+          "humedad": 94,
+          "nubes": 83
+        },
+        {
+          "id": 20,
+          "hora": "20:00",
+          "temp": 16.7,
+          "vientoKph": 6.8,
+          "presionMb": 1014,
+          "lluvia": 0,
+          "humedad": 95,
+          "nubes": 88
+        },
+        {
+          "id": 21,
+          "hora": "21:00",
+          "temp": 16.1,
+          "vientoKph": 7.2,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 94,
+          "nubes": 75
+        },
+        {
+          "id": 22,
+          "hora": "22:00",
+          "temp": 15.8,
+          "vientoKph": 6.8,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 93,
+          "nubes": 73
+        },
+        {
+          "id": 23,
+          "hora": "23:00",
+          "temp": 15.9,
+          "vientoKph": 6.5,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 93,
+          "nubes": 75
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "fecha": "2025-05-29",
+      "temperaturaMax": 26.5,
+      "temperaturaMin": 15.2,
+      "precipitacion": 6.54,
+      "horas": [
+        {
+          "id": 0,
+          "hora": "00:00",
+          "temp": 15.5,
+          "vientoKph": 6.5,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 91,
+          "nubes": 73
+        },
+        {
+          "id": 1,
+          "hora": "01:00",
+          "temp": 15.5,
+          "vientoKph": 5.8,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 90,
+          "nubes": 46
+        },
+        {
+          "id": 2,
+          "hora": "02:00",
+          "temp": 15.5,
+          "vientoKph": 6.1,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 90,
+          "nubes": 43
+        },
+        {
+          "id": 3,
+          "hora": "03:00",
+          "temp": 15.3,
+          "vientoKph": 6.1,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 89,
+          "nubes": 79
+        },
+        {
+          "id": 4,
+          "hora": "04:00",
+          "temp": 15.4,
+          "vientoKph": 5.4,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 89,
+          "nubes": 38
+        },
+        {
+          "id": 5,
+          "hora": "05:00",
+          "temp": 15.3,
+          "vientoKph": 5.4,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 88,
+          "nubes": 37
+        },
+        {
+          "id": 6,
+          "hora": "06:00",
+          "temp": 15.2,
+          "vientoKph": 5.4,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 88,
+          "nubes": 37
+        },
+        {
+          "id": 7,
+          "hora": "07:00",
+          "temp": 17.2,
+          "vientoKph": 2.9,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 83,
+          "nubes": 88
+        },
+        {
+          "id": 8,
+          "hora": "08:00",
+          "temp": 19.6,
+          "vientoKph": 1.8,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 76,
+          "nubes": 16
+        },
+        {
+          "id": 9,
+          "hora": "09:00",
+          "temp": 21.2,
+          "vientoKph": 4.7,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 73,
+          "nubes": 14
+        },
+        {
+          "id": 10,
+          "hora": "10:00",
+          "temp": 23.4,
+          "vientoKph": 5,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 67,
+          "nubes": 14
+        },
+        {
+          "id": 11,
+          "hora": "11:00",
+          "temp": 25.1,
+          "vientoKph": 4.7,
+          "presionMb": 1014,
+          "lluvia": 0,
+          "humedad": 60,
+          "nubes": 12
+        },
+        {
+          "id": 12,
+          "hora": "12:00",
+          "temp": 26,
+          "vientoKph": 4.7,
+          "presionMb": 1012,
+          "lluvia": 0,
+          "humedad": 56,
+          "nubes": 87
+        },
+        {
+          "id": 13,
+          "hora": "13:00",
+          "temp": 26.3,
+          "vientoKph": 3.2,
+          "presionMb": 1011,
+          "lluvia": 0,
+          "humedad": 55,
+          "nubes": 79
+        },
+        {
+          "id": 14,
+          "hora": "14:00",
+          "temp": 26.5,
+          "vientoKph": 1.8,
+          "presionMb": 1010,
+          "lluvia": 0,
+          "humedad": 54,
+          "nubes": 78
+        },
+        {
+          "id": 15,
+          "hora": "15:00",
+          "temp": 26.5,
+          "vientoKph": 3.6,
+          "presionMb": 1009,
+          "lluvia": 0,
+          "humedad": 55,
+          "nubes": 84
+        },
+        {
+          "id": 16,
+          "hora": "16:00",
+          "temp": 25.3,
+          "vientoKph": 5,
+          "presionMb": 1009,
+          "lluvia": 0,
+          "humedad": 64,
+          "nubes": 74
+        },
+        {
+          "id": 17,
+          "hora": "17:00",
+          "temp": 22.4,
+          "vientoKph": 3.6,
+          "presionMb": 1010,
+          "lluvia": 0,
+          "humedad": 81,
+          "nubes": 73
+        },
+        {
+          "id": 18,
+          "hora": "18:00",
+          "temp": 18.8,
+          "vientoKph": 1.4,
+          "presionMb": 1012,
+          "lluvia": 0,
+          "humedad": 91,
+          "nubes": 81
+        },
+        {
+          "id": 19,
+          "hora": "19:00",
+          "temp": 17.2,
+          "vientoKph": 4.7,
+          "presionMb": 1013,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 79
+        },
+        {
+          "id": 20,
+          "hora": "20:00",
+          "temp": 16.8,
+          "vientoKph": 5.8,
+          "presionMb": 1014,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 77
+        },
+        {
+          "id": 21,
+          "hora": "21:00",
+          "temp": 16.2,
+          "vientoKph": 5.8,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 95,
+          "nubes": 88
+        },
+        {
+          "id": 22,
+          "hora": "22:00",
+          "temp": 16,
+          "vientoKph": 6.1,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 95,
+          "nubes": 79
+        },
+        {
+          "id": 23,
+          "hora": "23:00",
+          "temp": 15.9,
+          "vientoKph": 5.8,
+          "presionMb": 1017,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 52
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "fecha": "2025-05-30",
+      "temperaturaMax": 25.3,
+      "temperaturaMin": 15.5,
+      "precipitacion": 13.99,
+      "horas": [
+        {
+          "id": 0,
+          "hora": "00:00",
+          "temp": 16.1,
+          "vientoKph": 6.5,
+          "presionMb": 1016,
+          "lluvia": 1,
+          "humedad": 94,
+          "nubes": 88
+        },
+        {
+          "id": 1,
+          "hora": "01:00",
+          "temp": 16,
+          "vientoKph": 6.1,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 93,
+          "nubes": 72
+        },
+        {
+          "id": 2,
+          "hora": "02:00",
+          "temp": 16,
+          "vientoKph": 5.4,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 92,
+          "nubes": 80
+        },
+        {
+          "id": 3,
+          "hora": "03:00",
+          "temp": 16,
+          "vientoKph": 5.8,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 92,
+          "nubes": 86
+        },
+        {
+          "id": 4,
+          "hora": "04:00",
+          "temp": 15.9,
+          "vientoKph": 4.7,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 91,
+          "nubes": 76
+        },
+        {
+          "id": 5,
+          "hora": "05:00",
+          "temp": 15.6,
+          "vientoKph": 4.7,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 91,
+          "nubes": 22
+        },
+        {
+          "id": 6,
+          "hora": "06:00",
+          "temp": 15.5,
+          "vientoKph": 5,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 91,
+          "nubes": 21
+        },
+        {
+          "id": 7,
+          "hora": "07:00",
+          "temp": 17.2,
+          "vientoKph": 2.5,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 87,
+          "nubes": 41
+        },
+        {
+          "id": 8,
+          "hora": "08:00",
+          "temp": 19,
+          "vientoKph": 2.2,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 82,
+          "nubes": 18
+        },
+        {
+          "id": 9,
+          "hora": "09:00",
+          "temp": 21.1,
+          "vientoKph": 3.6,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 77,
+          "nubes": 27
+        },
+        {
+          "id": 10,
+          "hora": "10:00",
+          "temp": 23,
+          "vientoKph": 6.1,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 69,
+          "nubes": 71
+        },
+        {
+          "id": 11,
+          "hora": "11:00",
+          "temp": 24.6,
+          "vientoKph": 6.5,
+          "presionMb": 1014,
+          "lluvia": 0,
+          "humedad": 63,
+          "nubes": 80
+        },
+        {
+          "id": 12,
+          "hora": "12:00",
+          "temp": 25.3,
+          "vientoKph": 5,
+          "presionMb": 1013,
+          "lluvia": 0,
+          "humedad": 62,
+          "nubes": 74
+        },
+        {
+          "id": 13,
+          "hora": "13:00",
+          "temp": 25.2,
+          "vientoKph": 4,
+          "presionMb": 1011,
+          "lluvia": 0,
+          "humedad": 59,
+          "nubes": 85
+        },
+        {
+          "id": 14,
+          "hora": "14:00",
+          "temp": 25.1,
+          "vientoKph": 3.6,
+          "presionMb": 1010,
+          "lluvia": 0,
+          "humedad": 60,
+          "nubes": 78
+        },
+        {
+          "id": 15,
+          "hora": "15:00",
+          "temp": 24.7,
+          "vientoKph": 4.3,
+          "presionMb": 1009,
+          "lluvia": 0,
+          "humedad": 62,
+          "nubes": 80
+        },
+        {
+          "id": 16,
+          "hora": "16:00",
+          "temp": 23.3,
+          "vientoKph": 4,
+          "presionMb": 1009,
+          "lluvia": 0,
+          "humedad": 74,
+          "nubes": 87
+        },
+        {
+          "id": 17,
+          "hora": "17:00",
+          "temp": 20.7,
+          "vientoKph": 2.2,
+          "presionMb": 1010,
+          "lluvia": 1,
+          "humedad": 89,
+          "nubes": 86
+        },
+        {
+          "id": 18,
+          "hora": "18:00",
+          "temp": 18.5,
+          "vientoKph": 1.1,
+          "presionMb": 1011,
+          "lluvia": 0,
+          "humedad": 92,
+          "nubes": 87
+        },
+        {
+          "id": 19,
+          "hora": "19:00",
+          "temp": 17.3,
+          "vientoKph": 4,
+          "presionMb": 1013,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 73
+        },
+        {
+          "id": 20,
+          "hora": "20:00",
+          "temp": 16.4,
+          "vientoKph": 4.7,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 97,
+          "nubes": 70
+        },
+        {
+          "id": 21,
+          "hora": "21:00",
+          "temp": 16.2,
+          "vientoKph": 5.4,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 60
+        },
+        {
+          "id": 22,
+          "hora": "22:00",
+          "temp": 15.9,
+          "vientoKph": 5,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 52
+        },
+        {
+          "id": 23,
+          "hora": "23:00",
+          "temp": 16.1,
+          "vientoKph": 5.4,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 56
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "fecha": "2025-05-31",
+      "temperaturaMax": 23.5,
+      "temperaturaMin": 15.8,
+      "precipitacion": 10.62,
+      "horas": [
+        {
+          "id": 0,
+          "hora": "00:00",
+          "temp": 16.5,
+          "vientoKph": 5.4,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 97,
+          "nubes": 60
+        },
+        {
+          "id": 1,
+          "hora": "01:00",
+          "temp": 16.4,
+          "vientoKph": 5.4,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 58
+        },
+        {
+          "id": 2,
+          "hora": "02:00",
+          "temp": 16.5,
+          "vientoKph": 4.3,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 52
+        },
+        {
+          "id": 3,
+          "hora": "03:00",
+          "temp": 16.5,
+          "vientoKph": 4,
+          "presionMb": 1014,
+          "lluvia": 0,
+          "humedad": 95,
+          "nubes": 51
+        },
+        {
+          "id": 4,
+          "hora": "04:00",
+          "temp": 16.1,
+          "vientoKph": 4.7,
+          "presionMb": 1014,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 55
+        },
+        {
+          "id": 5,
+          "hora": "05:00",
+          "temp": 16,
+          "vientoKph": 3.6,
+          "presionMb": 1014,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 75
+        },
+        {
+          "id": 6,
+          "hora": "06:00",
+          "temp": 15.9,
+          "vientoKph": 4.3,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 95,
+          "nubes": 53
+        },
+        {
+          "id": 7,
+          "hora": "07:00",
+          "temp": 17.3,
+          "vientoKph": 1.8,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 92,
+          "nubes": 77
+        },
+        {
+          "id": 8,
+          "hora": "08:00",
+          "temp": 18.5,
+          "vientoKph": 1.1,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 89,
+          "nubes": 72
+        },
+        {
+          "id": 9,
+          "hora": "09:00",
+          "temp": 19.7,
+          "vientoKph": 3.2,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 85,
+          "nubes": 76
+        },
+        {
+          "id": 10,
+          "hora": "10:00",
+          "temp": 21.7,
+          "vientoKph": 5.4,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 76,
+          "nubes": 73
+        },
+        {
+          "id": 11,
+          "hora": "11:00",
+          "temp": 23.5,
+          "vientoKph": 5,
+          "presionMb": 1014,
+          "lluvia": 0,
+          "humedad": 71,
+          "nubes": 78
+        },
+        {
+          "id": 12,
+          "hora": "12:00",
+          "temp": 23.2,
+          "vientoKph": 4.7,
+          "presionMb": 1013,
+          "lluvia": 0,
+          "humedad": 70,
+          "nubes": 79
+        },
+        {
+          "id": 13,
+          "hora": "13:00",
+          "temp": 21.8,
+          "vientoKph": 3.2,
+          "presionMb": 1012,
+          "lluvia": 0,
+          "humedad": 77,
+          "nubes": 83
+        },
+        {
+          "id": 14,
+          "hora": "14:00",
+          "temp": 20.1,
+          "vientoKph": 2.5,
+          "presionMb": 1011,
+          "lluvia": 0,
+          "humedad": 87,
+          "nubes": 56
+        },
+        {
+          "id": 15,
+          "hora": "15:00",
+          "temp": 19.2,
+          "vientoKph": 2.5,
+          "presionMb": 1011,
+          "lluvia": 0,
+          "humedad": 91,
+          "nubes": 71
+        },
+        {
+          "id": 16,
+          "hora": "16:00",
+          "temp": 18.6,
+          "vientoKph": 1.8,
+          "presionMb": 1011,
+          "lluvia": 1,
+          "humedad": 93,
+          "nubes": 71
+        },
+        {
+          "id": 17,
+          "hora": "17:00",
+          "temp": 17.8,
+          "vientoKph": 1.8,
+          "presionMb": 1012,
+          "lluvia": 0,
+          "humedad": 95,
+          "nubes": 52
+        },
+        {
+          "id": 18,
+          "hora": "18:00",
+          "temp": 17.3,
+          "vientoKph": 1.8,
+          "presionMb": 1013,
+          "lluvia": 0,
+          "humedad": 95,
+          "nubes": 79
+        },
+        {
+          "id": 19,
+          "hora": "19:00",
+          "temp": 16.7,
+          "vientoKph": 4.7,
+          "presionMb": 1014,
+          "lluvia": 0,
+          "humedad": 95,
+          "nubes": 87
+        },
+        {
+          "id": 20,
+          "hora": "20:00",
+          "temp": 16,
+          "vientoKph": 4,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 95,
+          "nubes": 70
+        },
+        {
+          "id": 21,
+          "hora": "21:00",
+          "temp": 15.8,
+          "vientoKph": 5.4,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 95,
+          "nubes": 89
+        },
+        {
+          "id": 22,
+          "hora": "22:00",
+          "temp": 15.9,
+          "vientoKph": 4.3,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 95,
+          "nubes": 76
+        },
+        {
+          "id": 23,
+          "hora": "23:00",
+          "temp": 16.2,
+          "vientoKph": 4,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 94,
+          "nubes": 34
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "fecha": "2025-06-01",
+      "temperaturaMax": 24.3,
+      "temperaturaMin": 15,
+      "precipitacion": 10.39,
+      "horas": [
+        {
+          "id": 0,
+          "hora": "00:00",
+          "temp": 15.8,
+          "vientoKph": 5,
+          "presionMb": 1017,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 48
+        },
+        {
+          "id": 1,
+          "hora": "01:00",
+          "temp": 15.4,
+          "vientoKph": 5,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 95,
+          "nubes": 77
+        },
+        {
+          "id": 2,
+          "hora": "02:00",
+          "temp": 15.2,
+          "vientoKph": 4.7,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 95,
+          "nubes": 43
+        },
+        {
+          "id": 3,
+          "hora": "03:00",
+          "temp": 15.1,
+          "vientoKph": 5.4,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 95,
+          "nubes": 46
+        },
+        {
+          "id": 4,
+          "hora": "04:00",
+          "temp": 15.1,
+          "vientoKph": 4.3,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 94,
+          "nubes": 35
+        },
+        {
+          "id": 5,
+          "hora": "05:00",
+          "temp": 15,
+          "vientoKph": 4.3,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 94,
+          "nubes": 73
+        },
+        {
+          "id": 6,
+          "hora": "06:00",
+          "temp": 15,
+          "vientoKph": 4.7,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 93,
+          "nubes": 35
+        },
+        {
+          "id": 7,
+          "hora": "07:00",
+          "temp": 16.5,
+          "vientoKph": 0.7,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 90,
+          "nubes": 28
+        },
+        {
+          "id": 8,
+          "hora": "08:00",
+          "temp": 18.4,
+          "vientoKph": 1.4,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 85,
+          "nubes": 29
+        },
+        {
+          "id": 9,
+          "hora": "09:00",
+          "temp": 20.4,
+          "vientoKph": 3.6,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 78,
+          "nubes": 23
+        },
+        {
+          "id": 10,
+          "hora": "10:00",
+          "temp": 22.4,
+          "vientoKph": 4.3,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 70,
+          "nubes": 80
+        },
+        {
+          "id": 11,
+          "hora": "11:00",
+          "temp": 23.9,
+          "vientoKph": 4.7,
+          "presionMb": 1014,
+          "lluvia": 0,
+          "humedad": 65,
+          "nubes": 75
+        },
+        {
+          "id": 12,
+          "hora": "12:00",
+          "temp": 23.9,
+          "vientoKph": 3.6,
+          "presionMb": 1013,
+          "lluvia": 0,
+          "humedad": 62,
+          "nubes": 89
+        },
+        {
+          "id": 13,
+          "hora": "13:00",
+          "temp": 24.3,
+          "vientoKph": 2.9,
+          "presionMb": 1012,
+          "lluvia": 0,
+          "humedad": 62,
+          "nubes": 81
+        },
+        {
+          "id": 14,
+          "hora": "14:00",
+          "temp": 24,
+          "vientoKph": 3.2,
+          "presionMb": 1011,
+          "lluvia": 0,
+          "humedad": 64,
+          "nubes": 87
+        },
+        {
+          "id": 15,
+          "hora": "15:00",
+          "temp": 22.9,
+          "vientoKph": 3.6,
+          "presionMb": 1010,
+          "lluvia": 0,
+          "humedad": 75,
+          "nubes": 76
+        },
+        {
+          "id": 16,
+          "hora": "16:00",
+          "temp": 21.5,
+          "vientoKph": 4,
+          "presionMb": 1010,
+          "lluvia": 0,
+          "humedad": 85,
+          "nubes": 80
+        },
+        {
+          "id": 17,
+          "hora": "17:00",
+          "temp": 20.3,
+          "vientoKph": 2.5,
+          "presionMb": 1011,
+          "lluvia": 0,
+          "humedad": 90,
+          "nubes": 78
+        },
+        {
+          "id": 18,
+          "hora": "18:00",
+          "temp": 17.9,
+          "vientoKph": 2.9,
+          "presionMb": 1012,
+          "lluvia": 0,
+          "humedad": 93,
+          "nubes": 62
+        },
+        {
+          "id": 19,
+          "hora": "19:00",
+          "temp": 16.5,
+          "vientoKph": 4.7,
+          "presionMb": 1014,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 55
+        },
+        {
+          "id": 20,
+          "hora": "20:00",
+          "temp": 16.1,
+          "vientoKph": 4.7,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 57
+        },
+        {
+          "id": 21,
+          "hora": "21:00",
+          "temp": 15.9,
+          "vientoKph": 4.7,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 72
+        },
+        {
+          "id": 22,
+          "hora": "22:00",
+          "temp": 15.4,
+          "vientoKph": 5.4,
+          "presionMb": 1017,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 83
+        },
+        {
+          "id": 23,
+          "hora": "23:00",
+          "temp": 15.1,
+          "vientoKph": 5.4,
+          "presionMb": 1017,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 78
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "fecha": "2025-06-02",
+      "temperaturaMax": 24.1,
+      "temperaturaMin": 14.9,
+      "precipitacion": 14.49,
+      "horas": [
+        {
+          "id": 0,
+          "hora": "00:00",
+          "temp": 16.5,
+          "vientoKph": 4.3,
+          "presionMb": 1017,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 62
+        },
+        {
+          "id": 1,
+          "hora": "01:00",
+          "temp": 16.5,
+          "vientoKph": 3.6,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 58
+        },
+        {
+          "id": 2,
+          "hora": "02:00",
+          "temp": 16.5,
+          "vientoKph": 3.6,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 60
+        },
+        {
+          "id": 3,
+          "hora": "03:00",
+          "temp": 16.4,
+          "vientoKph": 3.2,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 53
+        },
+        {
+          "id": 4,
+          "hora": "04:00",
+          "temp": 16.2,
+          "vientoKph": 4,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 55
+        },
+        {
+          "id": 5,
+          "hora": "05:00",
+          "temp": 16.2,
+          "vientoKph": 2.9,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 95,
+          "nubes": 57
+        },
+        {
+          "id": 6,
+          "hora": "06:00",
+          "temp": 16.4,
+          "vientoKph": 2.9,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 95,
+          "nubes": 55
+        },
+        {
+          "id": 7,
+          "hora": "07:00",
+          "temp": 17.2,
+          "vientoKph": 1.4,
+          "presionMb": 1017,
+          "lluvia": 0,
+          "humedad": 94,
+          "nubes": 63
+        },
+        {
+          "id": 8,
+          "hora": "08:00",
+          "temp": 18.7,
+          "vientoKph": 1.4,
+          "presionMb": 1017,
+          "lluvia": 0,
+          "humedad": 89,
+          "nubes": 85
+        },
+        {
+          "id": 9,
+          "hora": "09:00",
+          "temp": 20.5,
+          "vientoKph": 4,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 82,
+          "nubes": 88
+        },
+        {
+          "id": 10,
+          "hora": "10:00",
+          "temp": 22,
+          "vientoKph": 4,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 76,
+          "nubes": 88
+        },
+        {
+          "id": 11,
+          "hora": "11:00",
+          "temp": 23.3,
+          "vientoKph": 2.9,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 71,
+          "nubes": 85
+        },
+        {
+          "id": 12,
+          "hora": "12:00",
+          "temp": 23.1,
+          "vientoKph": 1.4,
+          "presionMb": 1013,
+          "lluvia": 0,
+          "humedad": 68,
+          "nubes": 79
+        },
+        {
+          "id": 13,
+          "hora": "13:00",
+          "temp": 24.1,
+          "vientoKph": 3.2,
+          "presionMb": 1012,
+          "lluvia": 0,
+          "humedad": 64,
+          "nubes": 72
+        },
+        {
+          "id": 14,
+          "hora": "14:00",
+          "temp": 23.7,
+          "vientoKph": 4,
+          "presionMb": 1011,
+          "lluvia": 0,
+          "humedad": 68,
+          "nubes": 84
+        },
+        {
+          "id": 15,
+          "hora": "15:00",
+          "temp": 23.1,
+          "vientoKph": 3.2,
+          "presionMb": 1010,
+          "lluvia": 0,
+          "humedad": 70,
+          "nubes": 77
+        },
+        {
+          "id": 16,
+          "hora": "16:00",
+          "temp": 22.2,
+          "vientoKph": 2.9,
+          "presionMb": 1010,
+          "lluvia": 0,
+          "humedad": 79,
+          "nubes": 74
+        },
+        {
+          "id": 17,
+          "hora": "17:00",
+          "temp": 20.8,
+          "vientoKph": 1.4,
+          "presionMb": 1011,
+          "lluvia": 0,
+          "humedad": 86,
+          "nubes": 81
+        },
+        {
+          "id": 18,
+          "hora": "18:00",
+          "temp": 18,
+          "vientoKph": 0.4,
+          "presionMb": 1012,
+          "lluvia": 1,
+          "humedad": 91,
+          "nubes": 85
+        },
+        {
+          "id": 19,
+          "hora": "19:00",
+          "temp": 16.4,
+          "vientoKph": 5.4,
+          "presionMb": 1014,
+          "lluvia": 0,
+          "humedad": 95,
+          "nubes": 56
+        },
+        {
+          "id": 20,
+          "hora": "20:00",
+          "temp": 15.8,
+          "vientoKph": 5.8,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 54
+        },
+        {
+          "id": 21,
+          "hora": "21:00",
+          "temp": 15.6,
+          "vientoKph": 5,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 95,
+          "nubes": 52
+        },
+        {
+          "id": 22,
+          "hora": "22:00",
+          "temp": 15.2,
+          "vientoKph": 6.1,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 95,
+          "nubes": 55
+        },
+        {
+          "id": 23,
+          "hora": "23:00",
+          "temp": 14.9,
+          "vientoKph": 6.1,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 95,
+          "nubes": 80
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "fecha": "2025-06-03",
+      "temperaturaMax": 24.6,
+      "temperaturaMin": 14.9,
+      "precipitacion": 13.4,
+      "horas": [
+        {
+          "id": 0,
+          "hora": "00:00",
+          "temp": 15.5,
+          "vientoKph": 5.8,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 92,
+          "nubes": 29
+        },
+        {
+          "id": 1,
+          "hora": "01:00",
+          "temp": 15.5,
+          "vientoKph": 5.4,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 91,
+          "nubes": 60
+        },
+        {
+          "id": 2,
+          "hora": "02:00",
+          "temp": 15.4,
+          "vientoKph": 5,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 90,
+          "nubes": 85
+        },
+        {
+          "id": 3,
+          "hora": "03:00",
+          "temp": 15.2,
+          "vientoKph": 4.7,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 90,
+          "nubes": 51
+        },
+        {
+          "id": 4,
+          "hora": "04:00",
+          "temp": 15,
+          "vientoKph": 5,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 91,
+          "nubes": 20
+        },
+        {
+          "id": 5,
+          "hora": "05:00",
+          "temp": 14.9,
+          "vientoKph": 4.7,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 91,
+          "nubes": 21
+        },
+        {
+          "id": 6,
+          "hora": "06:00",
+          "temp": 14.9,
+          "vientoKph": 4.3,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 91,
+          "nubes": 21
+        },
+        {
+          "id": 7,
+          "hora": "07:00",
+          "temp": 16.6,
+          "vientoKph": 1.8,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 87,
+          "nubes": 45
+        },
+        {
+          "id": 8,
+          "hora": "08:00",
+          "temp": 18.6,
+          "vientoKph": 1.8,
+          "presionMb": 1016,
+          "lluvia": 0,
+          "humedad": 81,
+          "nubes": 42
+        },
+        {
+          "id": 9,
+          "hora": "09:00",
+          "temp": 20.9,
+          "vientoKph": 4,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 74,
+          "nubes": 78
+        },
+        {
+          "id": 10,
+          "hora": "10:00",
+          "temp": 22.4,
+          "vientoKph": 5,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 70,
+          "nubes": 72
+        },
+        {
+          "id": 11,
+          "hora": "11:00",
+          "temp": 23.8,
+          "vientoKph": 5.4,
+          "presionMb": 1014,
+          "lluvia": 0,
+          "humedad": 66,
+          "nubes": 86
+        },
+        {
+          "id": 12,
+          "hora": "12:00",
+          "temp": 24.6,
+          "vientoKph": 4.3,
+          "presionMb": 1012,
+          "lluvia": 0,
+          "humedad": 64,
+          "nubes": 71
+        },
+        {
+          "id": 13,
+          "hora": "13:00",
+          "temp": 24.3,
+          "vientoKph": 3.6,
+          "presionMb": 1011,
+          "lluvia": 0,
+          "humedad": 64,
+          "nubes": 80
+        },
+        {
+          "id": 14,
+          "hora": "14:00",
+          "temp": 23.9,
+          "vientoKph": 2.5,
+          "presionMb": 1010,
+          "lluvia": 0,
+          "humedad": 66,
+          "nubes": 89
+        },
+        {
+          "id": 15,
+          "hora": "15:00",
+          "temp": 22.9,
+          "vientoKph": 1.4,
+          "presionMb": 1009,
+          "lluvia": 0,
+          "humedad": 73,
+          "nubes": 71
+        },
+        {
+          "id": 16,
+          "hora": "16:00",
+          "temp": 22.2,
+          "vientoKph": 1.4,
+          "presionMb": 1009,
+          "lluvia": 0,
+          "humedad": 78,
+          "nubes": 89
+        },
+        {
+          "id": 17,
+          "hora": "17:00",
+          "temp": 20.3,
+          "vientoKph": 2.5,
+          "presionMb": 1010,
+          "lluvia": 0,
+          "humedad": 88,
+          "nubes": 72
+        },
+        {
+          "id": 18,
+          "hora": "18:00",
+          "temp": 18.1,
+          "vientoKph": 4,
+          "presionMb": 1011,
+          "lluvia": 0,
+          "humedad": 91,
+          "nubes": 72
+        },
+        {
+          "id": 19,
+          "hora": "19:00",
+          "temp": 16.9,
+          "vientoKph": 5.4,
+          "presionMb": 1012,
+          "lluvia": 0,
+          "humedad": 94,
+          "nubes": 84
+        },
+        {
+          "id": 20,
+          "hora": "20:00",
+          "temp": 16.5,
+          "vientoKph": 5,
+          "presionMb": 1013,
+          "lluvia": 0,
+          "humedad": 94,
+          "nubes": 71
+        },
+        {
+          "id": 21,
+          "hora": "21:00",
+          "temp": 15.8,
+          "vientoKph": 5,
+          "presionMb": 1014,
+          "lluvia": 0,
+          "humedad": 95,
+          "nubes": 83
+        },
+        {
+          "id": 22,
+          "hora": "22:00",
+          "temp": 15.2,
+          "vientoKph": 5.8,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 53
+        },
+        {
+          "id": 23,
+          "hora": "23:00",
+          "temp": 15.9,
+          "vientoKph": 6.5,
+          "presionMb": 1015,
+          "lluvia": 0,
+          "humedad": 96,
+          "nubes": 84
+        }
+      ]
+    }
+  ]
+}
