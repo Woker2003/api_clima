@@ -5,20 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f1a78953-03c7-49c8-b3fa-a8033c13d48c" name="Changes" comment="first commit">
-      <change afterPath="$PROJECT_DIR$/ml/entrenar_lstm.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ml/entrenar_modelo.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ml/modelo_temperatura.pkl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ml/predecir.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ml/predecir_lstm.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/data/clima.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/rest-api-clima.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/rest-api-clima.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clima.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/clima.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/weatherService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/weatherService.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/archivo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/archivo.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/fechas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/fechas.js" afterDir="false" />
@@ -56,7 +48,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/Woker2003/api_clima&quot;,
-    &quot;accountId&quot;: &quot;8d9c6594-6c19-4e9f-9d42-49254c4d4188&quot;
+    &quot;accountId&quot;: &quot;05de9dc5-ca4e-4d32-9dc9-ce68d02e4785&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -70,35 +62,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Node.js.app.js.executor": "Run",
-    "Python.entrenar_lstm.executor": "Run",
-    "Python.entrenar_modelo.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "javascript.nodejs.core.library.configured.version": "22.15.0",
-    "javascript.nodejs.core.library.typings.version": "22.15.29",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "node",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2024.2.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Node.js.app.js.executor&quot;: &quot;Run&quot;,
+    &quot;Python.entrenar_lstm.executor&quot;: &quot;Run&quot;,
+    &quot;Python.entrenar_modelo.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;22.15.0&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;22.15.29&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2024.2.3\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "GitStage.ChangesTree.GroupingKeys": [
-      "directory",
-      "module",
-      "repository"
+  &quot;keyToStringList&quot;: {
+    &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;,
+      &quot;module&quot;,
+      &quot;repository&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\PC\Desktop\rest-api-clima\src\data" />
@@ -157,15 +149,14 @@
     <recent_temporary>
       <list>
         <item itemvalue="Node.js.app.js" />
-        <item itemvalue="Python.entrenar_lstm" />
-        <item itemvalue="Python.entrenar_modelo" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-WS-242.23726.96" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
       </set>
     </attachedChunks>
   </component>
@@ -192,6 +183,9 @@
       <workItem from="1748987822461" duration="9826000" />
       <workItem from="1749053768833" duration="1174000" />
       <workItem from="1749055650523" duration="1885000" />
+      <workItem from="1749126277591" duration="39000" />
+      <workItem from="1749177503032" duration="9287000" />
+      <workItem from="1749209823736" duration="5816000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -225,7 +219,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748049581104</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="first commit">
+      <option name="closed" value="true" />
+      <created>1749126308726</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1749126308726</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -1,197 +1,364 @@
-// Importamos los módulos necesarios
-const express = require("express"); // Framework web
-const { spawn } = require('child_process'); // Para ejecutar scripts de Python
-const { obtenerRangoFechas } = require("./utils/fechas"); // Utilidad para obtener fechas
-const { obtenerDatosClima, transformarDatos, getClimaActual } = require("./services/weatherService"); // Funciones del clima
-const { guardarJSON, guardarLecturaCSV } = require("./utils/archivo");
-const {readFileSync, existsSync} = require("node:fs");
-const path = require('path');
+// app.js - Servidor principal para clima y Arduino
 
-const app = express();
-app.use(express.json()); // Middleware para recibir JSON
+// ---------------------- MÓDULOS ----------------------
+// Importamos librerías necesarias para servidor, sistema de archivos y comunicación serial
+const express = require("express"); // Framework para crear servidor web
+const path = require("path"); // Manipulación de rutas de archivos
+const fs = require("fs"); // Sistema de archivos para leer/escribir archivos
+const SerialPort = require("serialport"); // Comunicación con puerto serial (Arduino)
+const ReadlineParser = require("@serialport/parser-readline"); // Parser para leer línea a línea el stream serial
 
-const PUERTO = process.env.PORT || 3000; // Puerto por defecto
-const CLAVE_API = process.env.API_KEY || '891e467b37d848fdb0d45350251105'; // API Key del clima
-const LAT = "4.4136"; // Latitud de Roldanillo
-const LON = "-76.1547"; // Longitud de Roldanillo
+// ---------------------- UTILIDADES Y SERVICIOS ----------------------
+const { obtenerRangoFechas } = require("./utils/fechas"); // Función para obtener rango de fechas para consulta clima
+const { obtenerDatosClima, transformarDatos } = require("./services/weatherService"); // API clima y transformación
+const { guardarLecturaCSV, limpiarYOrdenarLecturas, agregarHorasUnicas } = require("./utils/archivo"); // Utilidades para manejo de archivos CSV y JSON
 
-// Ruta principal para obtener datos del clima histórico y guardarlos
+// ---------------------- CONFIGURACIONES ----------------------
+const app = express(); // Crear instancia de Express
+const PUERTO = process.env.PORT || 3000; // Puerto donde escucha el servidor
+const CLAVE_API = process.env.API_KEY || "891e467b37d848fdb0d45350251105"; // API Key para consulta clima
+const LAT = "4.4136"; // Latitud fija para ubicación
+const LON = "-76.1547"; // Longitud fija para ubicación
+const HISTORIAL_PATH = path.join(__dirname, "data", "historial.csv"); // Ruta archivo CSV historial
+const CLIMA_JSON_PATH = path.join(__dirname, "data", "clima.json"); // Ruta archivo JSON principal con datos combinados
+
+// ---------------------- CONFIGURACIÓN SERIAL ----------------------
+// Variables para manejar puerto serial
+let port = null; // Puerto serial (Arduino)
+let parser = null; // Parser para leer línea a línea
+let puertoDisponible = false; // Estado si puerto está abierto
+
+// ---------------------- MIDDLEWARE ----------------------
+app.use(express.json()); // Middleware para parsear JSON en requests
+app.use(express.static(path.join(__dirname, "public"))); // Servir archivos estáticos desde carpeta "public"
+
+// ---------------------- VARIABLES DE ESTADO ----------------------
+let lecturaActiva = false; // Control para saber si estamos leyendo datos en tiempo real
+let bufferLecturas = []; // Buffer temporal donde se almacenan lecturas recibidas desde Arduino
+let horaInicio = null; // Momento en que se inicia la lectura (para orden y agrupamiento)
+let ultimaLectura = null; // Guardar última lectura recibida para consulta rápida
+
+// ---------------------- LECTURA DESDE ARDUINO ----------------------
+try {
+    port = new SerialPort({
+        path: "COM4", // Cambiar a puerto correcto según sistema
+        baudRate: 9600, // Velocidad estándar Arduino
+        autoOpen: true, // Abrir puerto al crear instancia
+    });
+
+    // Crear parser para dividir flujo serial por líneas
+    parser = port.pipe(new ReadlineParser({ delimiter: "\n" })); // cada vez que haya un salto de linea para
+
+    puertoDisponible = true;
+
+    // Evento cuando puerto abre correctamente
+    port.on("open", () => {
+        console.log("Puerto serial abierto correctamente");
+    });
+
+    // Evento cuando llega nueva línea desde Arduino
+    parser.on("data", (data) => {
+        if (!lecturaActiva) return; // Ignorar datos si no estamos en modo lectura activa
+    //tengo que presionar leer para que lea los datos haciendo una confirmacion de lectura
+        try {
+            // Parsear JSON recibido (esperamos que Arduino envíe JSON válido por línea)
+            const lectura = JSON.parse(data.trim());
+            lectura.timestamp = new Date().toISOString(); // Añadir timestamp actual
+
+            bufferLecturas.push(lectura); // Guardar lectura en buffer temporal
+            ultimaLectura = lectura; // Actualizar última lectura para consulta rápida
+
+            console.log("Lectura recibida:", lectura);
+        } catch (err) {
+            console.error("Error procesando dato:", err.message); // Captura errores de parseo JSON
+        }
+    });
+
+    // Evento error en puerto serial
+    port.on("error", (err) => {
+        console.error("Error en el puerto serial:", err.message);
+    });
+} catch (err) {
+    // En caso de fallo al abrir puerto (Arduino desconectado o puerto incorrecto)
+    console.warn("Arduino no conectado o puerto COM inválido. El sistema seguirá funcionando sin datos seriales.");
+    port = null;
+    parser = null;
+    puertoDisponible = false;
+}
+
+// ---------------------- RUTAS ----------------------
+
+// Ruta GET para obtener datos históricos desde API externa y guardar en archivo JSON y CSV
 app.get("/search", async (req, res) => {
     try {
-        // Obtenemos fechas de los últimos 3 días
-        /*const { fechaInicio, fechaFin } = obtenerRangoFechas(7);
+        const ahora = new Date();
 
-        // Llamamos a la API pública de clima con coordenadas y fechas
-        const datosAPI = await obtenerDatosClima({
-            lat: LAT,
-            lon: LON,
-            fechaInicio,
-            fechaFin,
-            apiKey: CLAVE_API,
-        });
+        // ---------------------------
+        // 1. Leer datos existentes del archivo JSON (si existe)
+        // ---------------------------
+        let datosExistentes = { lecturas: [] };
+        if (fs.existsSync(CLIMA_JSON_PATH)) {
+            const contenido = fs.readFileSync(CLIMA_JSON_PATH, "utf-8");
+            if (contenido.trim()) datosExistentes = JSON.parse(contenido);
+        }
 
-        // Transformamos los datos en lecturas útiles
-        const lecturas = transformarDatos(datosAPI);
+        // ---------------------------
+        // 2. Validar si ya tenemos datos actualizados hasta hoy
+        // ---------------------------
+        function mismaFechaSinHora(f1, f2) {
+            return f1.getFullYear() === f2.getFullYear() &&
+                f1.getMonth() === f2.getMonth() &&
+                f1.getDate() === f2.getDate();
+        }
+        if (datosExistentes.lecturas.length > 0) {
+            const fechas = datosExistentes.lecturas.map(d => new Date(d.fecha));
+            const fechaMaxima = new Date(Math.max(...fechas));
+            const hoy = new Date();
 
-        // Estructuramos el resultado
-        const resultado = {
-            ciudad: datosAPI.location.name,
-            region: datosAPI.location.region,
-            pais: datosAPI.location.country,
-            lecturas,
-        };*/
-        const data = readFileSync(path.join(__dirname, './data/clima.json'), 'utf-8');
-        const resultado = JSON.parse(data);
-
-        // Guardamos en archivo JSON y CSV localmente
-        /*guardarJSON("clima.json", resultado);*/
-        for (const lectura of resultado.lecturas) {
-            const fecha = lectura.fecha;
-
-            // Recorrer cada hora dentro del día
-            for (const hora of lectura.horas) {
-                // Llama a tu función para guardar en CSV con la fecha y la hora actual
-                guardarLecturaCSV(fecha, hora);
+            if (fechaMaxima > hoy || mismaFechaSinHora(fechaMaxima, hoy)) {
+                return res.json({
+                    mensaje: "Datos ya actualizados hasta hoy",
+                    lecturas: datosExistentes.lecturas,
+                });
             }
         }
 
+        // ---------------------------
+        // 3. Si no tenemos datos actualizados, calculamos rango de fechas para la consulta
+        // ---------------------------
+        let fechaInicio, fechaFin;
 
-        // Respondemos al cliente
-        res.json(resultado);
+        // Si hay datos previos, vamos a empezar la consulta desde el día siguiente al último dato guardado
+        if (datosExistentes && datosExistentes.lecturas.length > 0) {
+            const fechasLecturas = datosExistentes.lecturas.map(l => new Date(l.fecha));
+            const fechaMaxima = new Date(Math.max(...fechasLecturas));
+
+            // La fecha de inicio será un día después de la última fecha guardada
+            fechaInicio = new Date(fechaMaxima);
+            fechaInicio.setDate(fechaInicio.getDate() + 1);
+
+            // La fecha fin será hoy
+            fechaFin = ahora;
+
+            // Si la fechaInicio es mayor que la fecha fin, la ajustamos para no pedir datos innecesarios
+            if (fechaInicio > fechaFin) {
+                fechaInicio = new Date(fechaFin);
+            }
+        } else {
+            // Si no hay datos guardados, tomamos los últimos 7 días por defecto
+            const rango = obtenerRangoFechas(7);
+            fechaInicio = new Date(rango.fechaInicio);
+            fechaFin = new Date(rango.fechaFin);
+        }
+
+        // Formatear fechas a ISO (yyyy-mm-dd) para la consulta a la API
+        const fechaInicioISO = fechaInicio.toISOString().split("T")[0];
+        const fechaFinISO = fechaFin.toISOString().split("T")[0];
+
+        // ---------------------------
+        // 4. Consultar la API externa para obtener datos climáticos
+        // ---------------------------
+        const datosAPI = await obtenerDatosClima({
+            lat: LAT,
+            lon: LON,
+            fechaInicio: fechaInicioISO,
+            fechaFin: fechaFinISO,
+            apiKey: CLAVE_API,
+        });
+
+        // Transformar los datos para tener solo lo necesario
+        const lecturasNuevas = transformarDatos(datosAPI);
+
+        // Construimos objeto encabezado para enviar info de ciudad junto con lecturas
+        const encabezado = {
+            ciudad: datosAPI.location.name,
+            region: datosAPI.location.region,
+            pais: datosAPI.location.country,
+        };
+
+        // Si no teníamos datos previos, inicializamos la estructura
+        if (!datosExistentes) {
+            datosExistentes = { ...encabezado, lecturas: [] };
+        }
+
+        // Filtrar horas para no incluir horas futuras respecto a 'ahora'
+        const lecturasFiltradas = lecturasNuevas
+            .map(dia => {
+                // Filtramos las horas válidas que no estén en el futuro
+                const horasFiltradas = (dia.horas || []).filter(hora => {
+                    if (!hora.hora) return false;
+                    // Creamos un Date con la fecha y hora para comparar
+                    const fechaCompleta = new Date(`${dia.fecha}T${hora.hora}:00`);
+                    return !isNaN(fechaCompleta.getTime()) && fechaCompleta.getTime() <= ahora.getTime();
+                });
+                return { ...dia, horas: horasFiltradas };
+            })
+            .filter(dia => dia.horas.length > 0); // Eliminamos días sin horas válidas
+
+        // Guardar cada lectura en CSV para persistencia local
+        lecturasFiltradas.forEach(dia => {
+            dia.horas.forEach(hora => guardarLecturaCSV(dia.fecha, hora));
+        });
+
+        // Integrar lecturas nuevas con las existentes
+        lecturasFiltradas.forEach(nuevoDia => {
+            const diaExistente = datosExistentes.lecturas.find(d => d.fecha === nuevoDia.fecha);
+            if (diaExistente) {
+                agregarHorasUnicas(diaExistente, nuevoDia.horas);
+            } else {
+                datosExistentes.lecturas.push(nuevoDia);
+            }
+        });
+
+        // Limpiar duplicados y ordenar las lecturas para mantener orden correcto
+        datosExistentes = limpiarYOrdenarLecturas(datosExistentes);
+
+        // Guardar JSON actualizado en disco
+        fs.writeFileSync(CLIMA_JSON_PATH, JSON.stringify(datosExistentes, null, 2));
+
+        // ---------------------------
+        // 5. Responder con datos combinados (existentes + nuevos)
+        // ---------------------------
+        res.json({ ...encabezado, lecturas: datosExistentes.lecturas });
+
     } catch (error) {
         console.error("Error al obtener datos del clima:", error.message);
         res.status(502).json({ error: "No se pudo obtener datos del clima" });
     }
 });
 
-// Ruta para predecir temperatura usando Random Forest
-app.get('/prediccion', async (req, res) => {
-    try {
-        // Leer archivo JSON generado anteriormente
-        const data = readFileSync(join(__dirname, './data/clima.json'), 'utf-8');
-        const json = JSON.parse(data);
+// ---------------------- RUTAS PARA LECTURAS EN VIVO ----------------------
 
-        // Tomar la última lectura
-        const ultimaLectura = json.lecturas.at(-1); // o json.lecturas[json.lecturas.length - 1];
+// GET: Obtener última lectura recibida desde Arduino (buffer en memoria)
+app.get("/lecturas/arduino", (req, res) => {
+    if (!lecturaActiva || bufferLecturas.length === 0) {
+        // No hay lecturas en tiempo real si no está activa la lectura o buffer está vacío
+        return res.status(404).json({ error: "No hay lecturas en tiempo real" });
+    }
 
-        // Extraer los datos requeridos por el modelo
-        const datosModelo = {
-            humedad: ultimaLectura.humedad,
-            presion: ultimaLectura.presion,
-            viento: ultimaLectura.viento,
-            lluvia: ultimaLectura.lluvia || 0,
-            nubes: ultimaLectura.nubes
+    const ultima = bufferLecturas.at(-1); // Última lectura recibida
+    res.json({ lectura_actual: ultima });
+});
+
+// POST: Iniciar lectura en tiempo real desde Arduino
+app.post("/lecturas/iniciar", (req, res) => {
+    lecturaActiva = true; // Activar flag de lectura
+    bufferLecturas = []; // Limpiar buffer de lecturas anteriores
+    horaInicio = new Date(); // Marcar hora de inicio de lectura
+    res.json({ mensaje: "Lectura desde Arduino iniciada" });
+});
+
+// POST: Detener lectura en tiempo real, procesar datos y guardar promedios por hora
+app.post("/lecturas/detener", (req, res) => {
+    if (!lecturaActiva) {
+        // Si ya estaba detenida, solo confirmamos
+        return res.json({ mensaje: "La lectura ya estaba detenida, no hay datos para guardar." });
+    }
+
+    lecturaActiva = false; // Desactivar lectura
+
+    if (bufferLecturas.length === 0) {
+        // No hay datos para procesar
+        return res.json({ mensaje: "Lectura detenida. No había datos para procesar." });
+    }
+
+    const ahora = new Date();
+
+    // Filtrar lecturas con timestamp válido hasta momento actual
+    const bufferFiltrado = bufferLecturas.filter(l => new Date(l.timestamp) <= ahora);
+
+    const lecturasPorHora = {}; // Objeto para agrupar lecturas por hora (ISO string)
+
+    // Agrupar lecturas por hora, redondeando minutos a 00
+    bufferFiltrado.forEach(lectura => {
+        const fecha = new Date(lectura.timestamp);
+        fecha.setMinutes(0, 0, 0); // Redondear a inicio de hora
+        const claveHora = fecha.toISOString();
+
+        if (!lecturasPorHora[claveHora]) lecturasPorHora[claveHora] = [];
+        lecturasPorHora[claveHora].push(lectura);
+    });
+
+    // Leer datos existentes para combinar con nuevos
+    let datosExistentes = { lecturas: [] };
+    if (fs.existsSync(CLIMA_JSON_PATH)) {
+        const contenido = fs.readFileSync(CLIMA_JSON_PATH, "utf-8");
+        datosExistentes = JSON.parse(contenido);
+    }
+
+    const nuevasLecturas = []; // Aquí guardaremos lecturas promediadas
+
+    // Calcular promedio de cada grupo por hora
+    for (const hora in lecturasPorHora) {
+        const grupo = lecturasPorHora[hora];
+
+        // Reducir sumando cada propiedad numérica
+        const suma = grupo.reduce((acc, curr) => {
+            acc.temperatura += curr.temperatura ?? 0;
+            acc.humedad += curr.humedad ?? 0;
+            acc.presion += curr.presion ?? 0;
+            acc.viento += curr.viento ?? 0;
+            acc.lluvia += curr.lluvia ?? 0;
+            return acc;
+        }, { temperatura: 0, humedad: 0, presion: 0, viento: 0, lluvia: 0 });
+
+        const n = grupo.length;
+
+        // Crear objeto con valores promedios redondeados a 2 decimales
+        const lecturaPromediada = {
+            temperatura: +(suma.temperatura / n).toFixed(2),
+            humedad: +(suma.humedad / n).toFixed(2),
+            presion: +(suma.presion / n).toFixed(2),
+            viento: +(suma.viento / n).toFixed(2),
+            lluvia: +(suma.lluvia / n).toFixed(2),
+            fecha: hora.split("T")[0],
+            hora: hora.slice(11, 16), // Extraemos HH:mm
         };
 
-        // Ejecutamos el script de Python usando spawn
-        const proceso = spawn('python', ['../ml/predecir.py']);
-
-        let salida = ""; // Captura de la salida del script
-
-        // Escuchamos los datos que imprime el script
-        proceso.stdout.on('data', (data) => {
-            salida += data.toString();
-        });
-
-        // Capturamos errores del script de Python
-        proceso.stderr.on('data', (err) => {
-            console.error('Error en Python:', err.toString());
-        });
-
-        // Cuando finaliza el proceso de Python
-        proceso.on('close', () => {
-            try {
-                // Convertimos la salida JSON de Python en objeto JS
-                const resultado = JSON.parse(salida);
-                // Respondemos al cliente con la predicción
-                res.json({
-                    clima_actual: datosModelo,
-                    temperatura_predicha: resultado.temperatura_predicha
-                });
-            } catch (e) {
-                res.status(500).json({ error: 'Error procesando la predicción.' });
-            }
-        });
-
-        // Enviamos los datos al script de Python por stdin
-        proceso.stdin.write(JSON.stringify(datosModelo));
-        proceso.stdin.end();
-
-    } catch (err) {
-        console.error('Error:', err);
-        res.status(500).json({ error: 'No se pudo obtener el clima actual' });
+        nuevasLecturas.push(lecturaPromediada);
     }
-});
 
-app.get('/prediccion_lstm', async (req, res) => {
-    try {
-        // Ruta al archivo CSV con historial
-        const csvPath = path.join(__dirname, 'data', 'historial.csv');
-        if (!existsSync(csvPath)) {
-            return res.status(404).json({ error: 'El archivo historial.csv no existe.' });
+    // Agregar nuevas lecturas al historial existente, agrupando por fecha y hora
+    nuevasLecturas.forEach(nueva => {
+        let dia = datosExistentes.lecturas.find(d => d.fecha === nueva.fecha);
+        if (!dia) {
+            dia = { fecha: nueva.fecha, horas: [] };
+            datosExistentes.lecturas.push(dia);
         }
+        // Buscar si ya existe hora para reemplazar (actualizar)
+        const idxHora = dia.horas.findIndex(h => h.hora === nueva.hora);
+        if (idxHora >= 0) {
+            dia.horas[idxHora] = nueva; // Reemplazar si existe
+        } else {
+            dia.horas.push(nueva); // Agregar nueva hora
+        }
+    });
 
-        // Leer el CSV y extraer los últimos 7 días
-        const contenido = readFileSync(csvPath, 'utf-8');
-        const lineas = contenido.trim().split('\n');
-        const encabezado = lineas[0].split(',');
-        const ultimos7 = lineas.slice(-7);  // las últimas 7 filas
+    // Ordenar lecturas por fecha y hora para mantener orden cronológico
+    datosExistentes = limpiarYOrdenarLecturas(datosExistentes);
 
-        // Convertir a formato JSON
-        const datos = ultimos7.map(linea => {
-            const valores = linea.split(',');
-            const obj = {};
-            encabezado.forEach((col, i) => {
-                obj[col] = parseFloat(valores[i]);
-            });
-            return {
-                temperatura: obj.temperatura,
-                humedad: obj.humedad,
-                presion: obj.presion,
-                viento: obj.viento,
-                lluvia: obj.lluvia,
-                nubes: obj.nubes
-            };
-        });
+    // Guardar datos actualizados en archivo JSON
+    fs.writeFileSync(CLIMA_JSON_PATH, JSON.stringify(datosExistentes, null, 2));
 
-        // Ejecutar script de predicción
-        const proceso = spawn('python', ['../ml/predecir_lstm.py']);
-        let salida = "";
+    // Guardar nuevas lecturas en CSV
+    nuevasLecturas.forEach(({ fecha, hora, ...resto }) => guardarLecturaCSV(fecha, { hora, ...resto }));
 
-        proceso.stdout.on('data', (data) => {
-            try {
-                const output = JSON.parse(data.toString());
-                res.json(output);  // Enviar respuesta a cliente
-            } catch (err) {
-                console.error('❌ Error al procesar JSON:', err.message);
-                res.status(500).json({ error: 'Error en la predicción LSTM' });
-            }
-        });
-        proceso.stderr.on('data', err => console.error('❌ Error en Python:', err.toString()));
+    // Limpiar buffer y resetear horaInicio
+    bufferLecturas = [];
+    horaInicio = null;
 
-        proceso.on('close', () => {
-            try {
-                const resultado = JSON.parse(salida);
-                res.json({
-                    temperatura_predicha: resultado.temperatura_predicha
-                });
-            } catch (err) {
-                console.error('❌ Error al procesar JSON:', err);
-                res.status(500).json({ error: 'No se pudo interpretar la salida del modelo.' });
-            }
-        });
-
-        // Enviar los últimos 7 días como entrada
-        proceso.stdin.write(JSON.stringify(datos));
-        proceso.stdin.end();
-
-    } catch (err) {
-        console.error("❌ Error en la predicción LSTM:", err);
-        res.status(500).json({ error: 'Error interno del servidor' });
-    }
+    res.json({ mensaje: "Lectura detenida y datos guardados", nuevas_lecturas: nuevasLecturas });
 });
 
-// Iniciamos el servidor
+// ---------------------- RUTA PARA OBTENER ÚLTIMA LECTURA ACTUAL ----------------------
+app.get("/lecturas/actual", (req, res) => {
+    if (!ultimaLectura) {
+        return res.status(404).json({ error: "No hay lectura actual disponible" });
+    }
+    res.json(ultimaLectura);
+});
+
+// ---------------------- INICIAR SERVIDOR ----------------------
 app.listen(PUERTO, () => {
-    console.log(`Servidor escuchando en el puerto ${PUERTO}`);
+    console.log(`Servidor corriendo en http://localhost:${PUERTO}`);
 });
