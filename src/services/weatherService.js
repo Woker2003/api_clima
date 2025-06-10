@@ -1,5 +1,6 @@
 const axios = require("axios");
 
+//pido los datos a la API y los retorno
 async function obtenerDatosClima({ lat, lon, fechaInicio, fechaFin, apiKey }) {
     const respuesta = await axios.get("http://api.weatherapi.com/v1/history.json", {
         params: {
@@ -12,15 +13,14 @@ async function obtenerDatosClima({ lat, lon, fechaInicio, fechaFin, apiKey }) {
     });
     return respuesta.data;
 }
-
-function transformarDatos(data) {
+// formateamos los datos que recibimos para que sean mas legibles
+function transformarDatos(data, id = 0) {
     return data.forecast.forecastday.map((dia, idx) => ({
-        id: idx,
+        id: id + idx,
         fecha: dia.date,
         temperaturaMax: dia.day.maxtemp_c,
         temperaturaMin: dia.day.mintemp_c,
         precipitacion: dia.day.totalprecip_mm,
-
         horas: dia.hour.map((h, i) => {
             return {
                 id: i,

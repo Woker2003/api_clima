@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>Estación Meteorológica</title>
-    <!-- Importamos Bootstrap 5 CSS desde CDN para estilos rápidos y responsivos -->
+    <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 </head>
 <body class="p-4">
@@ -11,19 +11,18 @@
 <div class="container">
     <h1 class="mb-4">Estación Meteorológica</h1>
 
-    <!-- Botones para controlar lectura y búsqueda de datos -->
+    <!-- Botones -->
     <div class="mb-3 d-flex flex-wrap gap-2">
-        <button id="btnIniciar" class="btn btn-success" onclick="iniciarLectura()" aria-live="polite" aria-label="Iniciar lectura de datos">Iniciar Lectura</button>
-        <button id="btnDetener" class="btn btn-danger" onclick="detenerLectura()" aria-live="polite" aria-label="Detener lectura de datos" disabled>Detener Lectura</button>
-        <!-- Cambié botón buscar para que redireccione -->
-        <button id="btnBuscar" class="btn btn-primary" onclick="window.location.href='/search'" aria-live="polite" aria-label="Buscar datos en la ruta search">Buscar (/search)</button>
+        <button id="btnIniciar" class="btn btn-success" onclick="iniciarLectura()">Iniciar Lectura</button>
+        <button id="btnDetener" class="btn btn-danger" onclick="detenerLectura()" disabled>Detener Lectura</button>
+        <button id="btnBuscar" class="btn btn-primary" onclick="buscarDatos()">Visualizar Clima</button>
     </div>
 
-    <!-- Estado actual del sistema (leyendo o detenido), con color y roles ARIA para accesibilidad -->
-    <div id="estado" class="fw-bold text-danger mb-3" aria-live="polite" aria-atomic="true">Estado: detenido</div>
+    <!-- Estado -->
+    <div id="estado" class="fw-bold text-danger mb-3" aria-live="polite">Estado: detenido</div>
 
-    <!-- Card que muestra los datos actuales de la estación meteorológica -->
-    <div class="card p-3">
+    <!-- Card de datos en vivo -->
+    <div class="card p-3 mb-4">
         <p><strong>Temperatura:</strong> <span id="temp">-</span> °C</p>
         <p><strong>Humedad:</strong> <span id="hum">-</span> %</p>
         <p><strong>Presión:</strong> <span id="pres">-</span> hPa</p>
@@ -31,114 +30,185 @@
         <p><strong>Lluvia:</strong> <span id="lluvia">-</span></p>
         <p><strong>Hora:</strong> <span id="hora">-</span></p>
     </div>
+
+    <!-- Aquí se mostrará el clima histórico -->
+    <div id="resultados"></div>
+    <nav aria-label="Paginación clima">
+        <ul class="pagination justify-content-center" id="paginacion"></ul>
+    </nav>
 </div>
 
-<!-- Script de Bootstrap Bundle que incluye Popper para funcionalidades (modal ya no usado, pero lo dejo por si quieres usar algo más de Bootstrap) -->
+<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
 <script>
-    // Variable global para controlar el estado activo o no de la lectura
+    let currentPage = 1;
+    const pageSize = 6;
     let estadoActivo = false;
-
-    // Referencias a botones y elemento estado para manipularlos
     const btnIniciar = document.getElementById('btnIniciar');
     const btnDetener = document.getElementById('btnDetener');
     const estadoDiv = document.getElementById('estado');
 
-    // Función para actualizar el texto y color del estado
-    function setEstado(text, activo) {
-        estadoDiv.textContent = `Estado: ${text}`;
-        if (activo) {
-            estadoDiv.classList.remove('text-danger');
-            estadoDiv.classList.add('text-success');
-        } else {
-            estadoDiv.classList.remove('text-success');
-            estadoDiv.classList.add('text-danger');
-        }
-    }
-
-    // Muestra spinner en un botón mientras se procesa una acción
+    // Spinner helpers
     function activarSpinner(btn) {
         btn.disabled = true;
         btn.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ${btn.textContent}`;
     }
-
-    // Vuelve a texto normal y habilita el botón
     function desactivarSpinner(btn, texto) {
         btn.disabled = false;
         btn.textContent = texto;
     }
 
-    // Función que obtiene la última lectura del servidor y actualiza la UI
+    function setEstado(text, activo) {
+        estadoDiv.textContent = `Estado: ${text}`;
+        estadoDiv.classList.toggle('text-success', activo);
+        estadoDiv.classList.toggle('text-danger', !activo);
+        estadoActivo = activo;
+    }
+
     async function obtenerLectura() {
         if (!estadoActivo) return;
-
         try {
             const res = await fetch("/lecturas/arduino");
-            if (!res.ok) throw new Error("Sin datos");
-
+            if (!res.ok) throw new Error();
             const { lectura_actual } = await res.json();
-
-            document.getElementById("temp").textContent = lectura_actual.temperatura ?? "-";
-            document.getElementById("hum").textContent = lectura_actual.humedad ?? "-";
-            document.getElementById("pres").textContent = lectura_actual.presion ?? "-";
-            document.getElementById("viento").textContent = lectura_actual.viento ?? "-";
-            document.getElementById("lluvia").textContent = lectura_actual.lluvia ?? "-";
-
-            const fecha = new Date(lectura_actual.timestamp);
-            if (!isNaN(fecha)) {
-                document.getElementById("hora").textContent = fecha.toLocaleString();
-            } else {
-                document.getElementById("hora").textContent = "-";
-            }
-
-        } catch (error) {
-            console.error("Error al obtener lectura:", error.message);
-            ['temp','hum','pres','viento','lluvia','hora'].forEach(id => document.getElementById(id).textContent = "-");
+            const ids = ['temp','hum','pres','viento','lluvia','hora'];
+            document.getElementById('temp').textContent = lectura_actual.temperatura ?? '-';
+            document.getElementById('hum').textContent  = lectura_actual.humedad    ?? '-';
+            document.getElementById('pres').textContent = lectura_actual.presion    ?? '-';
+            document.getElementById('viento').textContent = lectura_actual.viento    ?? '-';
+            document.getElementById('lluvia').textContent = lectura_actual.lluvia    ?? '-';
+            const f = new Date(lectura_actual.timestamp);
+            document.getElementById('hora').textContent = isNaN(f) ? '-' : f.toLocaleString();
+        } catch {
+            ['temp','hum','pres','viento','lluvia','hora'].forEach(id => document.getElementById(id).textContent = '-');
         }
     }
 
-    // Función para iniciar la lectura desde el backend
     async function iniciarLectura() {
+        activarSpinner(btnIniciar);
         try {
-            activarSpinner(btnIniciar);
-            const res = await fetch("/lecturas/iniciar", { method: "POST" });
-            if (!res.ok) throw new Error("Error iniciando lectura");
-            await res.json();
-
-            estadoActivo = true;
-            setEstado("leyendo...", true);
-            btnIniciar.disabled = true;
+            await fetch("/lecturas/iniciar", { method: "POST" });
+            setEstado('leyendo...', true);
             btnDetener.disabled = false;
-        } catch (error) {
-            alert("Error: " + error.message);
+        } catch (e) {
+            alert('Error iniciando lectura');
         } finally {
-            desactivarSpinner(btnIniciar, "Iniciar Lectura");
+            desactivarSpinner(btnIniciar, 'Iniciar Lectura');
         }
     }
 
-    // Función para detener la lectura desde backend
     async function detenerLectura() {
+        activarSpinner(btnDetener);
         try {
-            activarSpinner(btnDetener);
-            const res = await fetch("/lecturas/detener", { method: "POST" });
-            if (!res.ok) throw new Error("Error deteniendo lectura");
-            await res.json();
-
-            estadoActivo = false;
-            setEstado("detenido", false);
+            await fetch("/lecturas/detener", { method: "POST" });
+            setEstado('detenido', false);
             btnDetener.disabled = true;
-            btnIniciar.disabled = false;
-        } catch (error) {
-            alert("Error: " + error.message);
+        } catch {
+            alert('Error deteniendo lectura');
         } finally {
-            desactivarSpinner(btnDetener, "Detener Lectura");
+            desactivarSpinner(btnDetener, 'Detener Lectura');
         }
     }
 
-    // Actualiza la lectura cada 2 segundos
+    // ---------------------------------------
+    // Mostrar clima histórico (respuesta de /search)
+    // ---------------------------------------
+    async function buscarDatos(page = 1) {
+        const btn = document.getElementById('btnBuscar');
+        activarSpinner(btn);
+        try {
+            const res = await fetch(`/search?page=${page}`);
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+            const data = await res.json();
+
+            renderResultados(data);
+            renderPaginacion(data.page, data.pages);
+            currentPage = data.page;
+        } catch (err) {
+            console.error("Error al obtener datos:", err);
+            alert('Error al obtener datos históricos. Revisa la consola.');
+        } finally {
+            desactivarSpinner(btn, 'Visualizar Clima');
+        }
+    }
+    function renderResultados(data) {
+        const cont = document.getElementById('resultados');
+        cont.innerHTML = `<h2>Clima en ${data.ciudad}, ${data.region} (${data.pais})</h2>`;
+        console.log(data)
+        data.lecturas.forEach(dia => {
+            const card = document.createElement('div');
+            card.className = 'card mb-3';
+            const body = document.createElement('div');
+            body.className = 'card-body';
+            const title = document.createElement('h5');
+            title.className = 'card-title';
+            title.textContent = dia.fecha;
+            body.appendChild(title);
+
+            // Tabla responsive
+            const wrapper = document.createElement('div');
+            wrapper.className = 'table-responsive';
+            const table = document.createElement('table');
+            table.className = 'table table-sm table-striped';
+
+            // Cabecera
+            const thead = document.createElement('thead');
+            thead.innerHTML = '<tr><th>Hora</th><th>Temp (°C)</th><th>Humedad (%)</th><th>Presión (hPa)</th><th>Viento</th><th>Lluvia</th></tr>';
+            table.appendChild(thead);
+
+            // Cuerpo
+            const tbody = document.createElement('tbody');
+            console.log(dia)
+            dia.horas.forEach(h => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+            <td>${h.hora}</td>
+            <td>${h.temp ?? '-'}</td>
+            <td>${h.humedad ?? '-'}</td>
+            <td>${h.presionMb ?? '-'}</td>
+            <td>${h.vientoKph ?? '-'}</td>
+            <td>${h.lluvia ?? '-'}</td>
+          `;
+                tbody.appendChild(tr);
+            });
+            table.appendChild(tbody);
+            wrapper.appendChild(table);
+            body.appendChild(wrapper);
+            card.appendChild(body);
+            cont.appendChild(card);
+        });
+    }
+
+    function renderPaginacion(page, pages) {
+        const pag = document.getElementById('paginacion');
+        pag.innerHTML = '';
+
+        const createItem = (p, label = p, disabled = false, active = false) => {
+            const li = document.createElement('li');
+            li.className = `page-item ${disabled?'disabled':''} ${active?'active':''}`;
+            const a = document.createElement('a');
+            a.className = 'page-link';
+            a.href = '#';
+            a.textContent = label;
+            if (!disabled && !active) a.onclick = e => { e.preventDefault(); buscarDatos(p); };
+            li.appendChild(a);
+            return li;
+        };
+
+        // Prev
+        pag.appendChild(createItem(page-1, '«', page===1));
+        // Números
+        for (let p = 1; p <= pages; p++) {
+            pag.appendChild(createItem(p, p, false, p===page));
+        }
+        // Next
+        pag.appendChild(createItem(page+1, '»', page===pages));
+    }
+
+    // arranca el polling
     setInterval(obtenerLectura, 2000);
 </script>
-
 </body>
 </html>
