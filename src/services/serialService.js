@@ -45,6 +45,10 @@ class SerialService {
     getBuffer() {
         return this.buffer;
     }
+
+    getLast() {
+        return this.buffer.length > 0 ? this.buffer[this.buffer.length - 1] : null;
+    }
 }
 
 module.exports = new SerialService(process.env.SERIAL_PORT, Number(process.env.BAUD_RATE));

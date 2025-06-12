@@ -22,7 +22,7 @@ function guardarLecturaCSV(fecha, data) {
 }
 
 /**
- * Elimina duplicados y ordena un objeto con estructura { lecturas: [ { fecha, horas: [...] }, ... ] }.
+ * Elimina duplicados y ordena un objeto con estructura.
  * - Ordena días de forma ascendente.
  * - Quita días duplicados (misma fecha) en O(n) con un Set.
  * - Para cada día, quita horas duplicadas y ordena por hora.

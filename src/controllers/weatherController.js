@@ -36,6 +36,7 @@ async function search(req, res) {
             ({ fechaInicio, fechaFin } = ajustarRango(fechaInicio, fechaFin));
             ultimaId = maxId;
         } else {
+            logger.info("Se solicita la peticion a la api de los ultimos 7 dias");
             // si el objeto esta vacio obtenemos el rango de fechas de los ultimos 7 dias
             ({ fechaInicio, fechaFin } = obtenerRangoFechas(7));
             ultimaId = 0;
@@ -73,7 +74,7 @@ async function search(req, res) {
                     }
                 });
             } else {
-                datos.lecturas.push(nuevoDia); // agrega toda la lectura
+                datos.lecturas.push(nuevoDia); // agrega toda la lectura del dia
             }
         });
 

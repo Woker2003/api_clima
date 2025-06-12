@@ -4,16 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f1a78953-03c7-49c8-b3fa-a8033c13d48c" name="Changes" comment="first commit">
-      <change afterPath="$PROJECT_DIR$/src/public/index.html" afterDir="false" />
+    <list default="true" id="f1a78953-03c7-49c8-b3fa-a8033c13d48c" name="Changes" comment="cambios finales">
+      <change afterPath="$PROJECT_DIR$/src/controllers/lecturasController.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/procesador.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/clima.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/weatherController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/weatherController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/archivoService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/archivoService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/serialService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/serialService.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/weatherService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/weatherService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/archivo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/archivo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/fechas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/fechas.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,8 +27,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="Python Script" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -185,7 +184,13 @@
       <workItem from="1749055650523" duration="1885000" />
       <workItem from="1749126277591" duration="39000" />
       <workItem from="1749177503032" duration="9287000" />
-      <workItem from="1749209823736" duration="5816000" />
+      <workItem from="1749209823736" duration="6222000" />
+      <workItem from="1749420763678" duration="2789000" />
+      <workItem from="1749424741298" duration="12668000" />
+      <workItem from="1749487991560" duration="7227000" />
+      <workItem from="1749505631533" duration="2651000" />
+      <workItem from="1749514140611" duration="703000" />
+      <workItem from="1749691438220" duration="7610000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -227,7 +232,23 @@
       <option name="project" value="LOCAL" />
       <updated>1749126308726</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="cambios (faltan pruebas)">
+      <option name="closed" value="true" />
+      <created>1749216082881</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1749216082882</updated>
+    </task>
+    <task id="LOCAL-00007" summary="cambios finales">
+      <option name="closed" value="true" />
+      <created>1749566598751</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1749566598751</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -253,6 +274,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="New changelist" />
     <MESSAGE value="first commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
+    <MESSAGE value="cambios (faltan pruebas)" />
+    <MESSAGE value="cambios finales" />
+    <option name="LAST_COMMIT_MESSAGE" value="cambios finales" />
   </component>
 </project>

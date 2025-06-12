@@ -1,41 +1,44 @@
-                // Carga variables de .env
-const express = require('express');
-const path = require('path');
-require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
-const fs = require('fs').promises;
-const logger = require('./logger');
-const config = require('./config');
+/**
+ * Archivo principal del servidor
+ * Inicializa Express, configura rutas y servicios
+ * Gestiona la conexión serial con Arduino y permite consultar datos de clima
+ */
 
-// Servicios y controladores
-const serialService = require('./services/serialService');
-const { search } = require('./controllers/weatherController');
+// Carga de dependencias y configuración del servidor
+const express = require('express'); // Framework para crear el servidor web y gestionar rutas
+const path = require('path'); // Módulo nativo de Node.js para manejar rutas de archivos
+const logger = require('./logger'); // Sistema de logs personalizado para registrar eventos y errores
+const config = require('./config'); // Archivo de configuración con variables globales obtenidad de .env
 
-const app = express();
-app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+// Importación de servicios y controladores
+const serialService = require('./services/serialService'); // Servicio para gestionar la conexión serial con Arduino
+const { search } = require('./controllers/weatherController');  // Controlador para consultar y almacenar datos de clima desde una API externa
+const { detenerLectura } = require('./controllers/lecturasController');
 
-// Rutas
-app.get('/search', search);
+const app = express(); // Inicializa una nueva aplicación de Express
+app.use(express.json()); // Middleware que permite recibir y procesar datos JSON en las peticiones
+app.use(express.static(path.join(__dirname, 'public'))); // Sirve archivos estáticos (HTML, CSS, JS) desde la carpeta 'public'
 
-app.get('/lecturas/arduino', (req, res) => {
-    const last = serialService.getLast();
-    if (!last) return res.status(404).json({ error: 'No hay lecturas en tiempo real' });
-    res.json({ lectura_actual: last });
-});
+// Rutas de la API
+app.get('/search', search); // Ruta que consulta datos climáticos de la API, los guarda y responde con resultados paginados
 
 app.post('/lecturas/iniciar', (req, res) => {
-    serialService.start();
-    res.json({ mensaje: 'Lectura serial iniciada' });
+    // Ruta para iniciar la lectura serial desde Arduino
+    serialService.start(); // Abre el puerto serial y empieza a recibir datos
+    res.json({ mensaje: 'Lectura serial iniciada' }); // Confirma al cliente que se inició correctamente
 });
 
-app.post('/lecturas/detener', async (req, res) => {
-    serialService.stop();
-    const buffer = serialService.getBuffer();
-    // Aquí procesar buffer, calcular promedios y guardar...
-    res.json({ mensaje: 'Lectura detenida', total: buffer.length });
+// Ruta que devuelve la última lectura recibida desde Arduino
+app.get('/lecturas/arduino', (req, res) => {
+    const last = serialService.getLast(); // Obtiene la última lectura almacenada en memoria
+    if (!last) return res.status(404).json({ error: 'No hay lecturas en tiempo real' }); // Si no hay datos, responde con error
+    res.json({ lectura_actual: last }); // Devuelve la lectura más reciente
 });
 
-// Iniciar servidor
+// Ruta para detener la lectura serial desde Arduino
+app.post('/lecturas/detener', detenerLectura);
+
+// Inicia el servidor y lo pone a escuchar en el puerto configurado
 app.listen(config.port, () => {
-    logger.info(`Servidor corriendo en http://localhost:${config.port}`);
+    logger.info(`Servidor corriendo en http://localhost:${config.port}`); // Mensaje de confirmación en consola/logs
 });
