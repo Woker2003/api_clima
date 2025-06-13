@@ -5,6 +5,7 @@
  */
 
 // Carga de dependencias y configuración del servidor
+require('dotenv').config();
 const express = require('express'); // Framework para crear el servidor web y gestionar rutas
 const path = require('path'); // Módulo nativo de Node.js para manejar rutas de archivos
 const logger = require('./logger'); // Sistema de logs personalizado para registrar eventos y errores

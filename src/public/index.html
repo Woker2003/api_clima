@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8" />
     <title>Estación Meteorológica</title>
-    <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 </head>
 <body class="p-4">
@@ -11,17 +10,16 @@
 <div class="container">
     <h1 class="mb-4">Estación Meteorológica</h1>
 
-    <!-- Botones -->
+    <!-- Controles -->
     <div class="mb-3 d-flex flex-wrap gap-2">
-        <button id="btnIniciar" class="btn btn-success" onclick="iniciarLectura()">Iniciar Lectura</button>
-        <button id="btnDetener" class="btn btn-danger" onclick="detenerLectura()" disabled>Detener Lectura</button>
-        <button id="btnBuscar" class="btn btn-primary" onclick="buscarDatos()">Visualizar Clima</button>
+        <button id="btnIniciar" class="btn btn-success">Iniciar Lectura</button>
+        <button id="btnDetener" class="btn btn-danger" disabled>Detener Lectura</button>
+        <button id="btnBuscar" class="btn btn-primary">Visualizar Clima</button>
     </div>
 
-    <!-- Estado -->
     <div id="estado" class="fw-bold text-danger mb-3" aria-live="polite">Estado: detenido</div>
 
-    <!-- Card de datos en vivo -->
+    <!-- Datos en vivo -->
     <div class="card p-3 mb-4">
         <p><strong>Temperatura:</strong> <span id="temp">-</span> °C</p>
         <p><strong>Humedad:</strong> <span id="hum">-</span> %</p>
@@ -31,184 +29,142 @@
         <p><strong>Hora:</strong> <span id="hora">-</span></p>
     </div>
 
-    <!-- Aquí se mostrará el clima histórico -->
+    <!-- Resultados históricos -->
     <div id="resultados"></div>
-    <nav aria-label="Paginación clima">
+    <nav aria-label="Paginación">
         <ul class="pagination justify-content-center" id="paginacion"></ul>
     </nav>
 </div>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-
 <script>
-    let currentPage = 1;
-    const pageSize = 6;
-    let estadoActivo = false;
-    const btnIniciar = document.getElementById('btnIniciar');
-    const btnDetener = document.getElementById('btnDetener');
-    const estadoDiv = document.getElementById('estado');
+    (() => {
+        // Elementos del DOM
+        const estadoEl = document.getElementById('estado');
+        const btnIniciar = document.getElementById('btnIniciar');
+        const btnDetener = document.getElementById('btnDetener');
+        const btnBuscar = document.getElementById('btnBuscar');
 
-    // Spinner helpers
-    function activarSpinner(btn) {
-        btn.disabled = true;
-        btn.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ${btn.textContent}`;
-    }
-    function desactivarSpinner(btn, texto) {
-        btn.disabled = false;
-        btn.textContent = texto;
-    }
+        let estadoActivo = false;
+        let paginaActual = 1;
 
-    function setEstado(text, activo) {
-        estadoDiv.textContent = `Estado: ${text}`;
-        estadoDiv.classList.toggle('text-success', activo);
-        estadoDiv.classList.toggle('text-danger', !activo);
-        estadoActivo = activo;
-    }
-
-    async function obtenerLectura() {
-        if (!estadoActivo) return;
-        try {
-            const res = await fetch("/lecturas/arduino");
-            if (!res.ok) throw new Error();
-            const { lectura_actual } = await res.json();
-            const ids = ['temp','hum','pres','viento','lluvia','hora'];
-            document.getElementById('temp').textContent = lectura_actual.temperatura ?? '-';
-            document.getElementById('hum').textContent  = lectura_actual.humedad    ?? '-';
-            document.getElementById('pres').textContent = lectura_actual.presion    ?? '-';
-            document.getElementById('viento').textContent = lectura_actual.viento    ?? '-';
-            document.getElementById('lluvia').textContent = lectura_actual.lluvia    ?? '-';
-            const f = new Date(lectura_actual.timestamp);
-            document.getElementById('hora').textContent = isNaN(f) ? '-' : f.toLocaleString();
-        } catch {
-            ['temp','hum','pres','viento','lluvia','hora'].forEach(id => document.getElementById(id).textContent = '-');
-        }
-    }
-
-    async function iniciarLectura() {
-        activarSpinner(btnIniciar);
-        try {
-            await fetch("/lecturas/iniciar", { method: "POST" });
-            setEstado('leyendo...', true);
-            btnDetener.disabled = false;
-        } catch (e) {
-            alert('Error iniciando lectura');
-        } finally {
-            desactivarSpinner(btnIniciar, 'Iniciar Lectura');
-        }
-    }
-
-    async function detenerLectura() {
-        activarSpinner(btnDetener);
-        try {
-            await fetch("/lecturas/detener", { method: "POST" });
-            setEstado('detenido', false);
-            btnDetener.disabled = true;
-        } catch {
-            alert('Error deteniendo lectura');
-        } finally {
-            desactivarSpinner(btnDetener, 'Detener Lectura');
-        }
-    }
-
-    // ---------------------------------------
-    // Mostrar clima histórico (respuesta de /search)
-    // ---------------------------------------
-    async function buscarDatos(page = 1) {
-        const btn = document.getElementById('btnBuscar');
-        activarSpinner(btn);
-        try {
-            const res = await fetch(`/search?page=${page}`);
-            if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
-            const data = await res.json();
-
-            renderResultados(data);
-            renderPaginacion(data.page, data.pages);
-            currentPage = data.page;
-        } catch (err) {
-            console.error("Error al obtener datos:", err);
-            alert('Error al obtener datos históricos. Revisa la consola.');
-        } finally {
-            desactivarSpinner(btn, 'Visualizar Clima');
-        }
-    }
-    function renderResultados(data) {
-        const cont = document.getElementById('resultados');
-        cont.innerHTML = `<h2>Clima en ${data.ciudad}, ${data.region} (${data.pais})</h2>`;
-        console.log(data)
-        data.lecturas.forEach(dia => {
-            const card = document.createElement('div');
-            card.className = 'card mb-3';
-            const body = document.createElement('div');
-            body.className = 'card-body';
-            const title = document.createElement('h5');
-            title.className = 'card-title';
-            title.textContent = dia.fecha;
-            body.appendChild(title);
-
-            // Tabla responsive
-            const wrapper = document.createElement('div');
-            wrapper.className = 'table-responsive';
-            const table = document.createElement('table');
-            table.className = 'table table-sm table-striped';
-
-            // Cabecera
-            const thead = document.createElement('thead');
-            thead.innerHTML = '<tr><th>Hora</th><th>Temp (°C)</th><th>Humedad (%)</th><th>Presión (hPa)</th><th>Viento</th><th>Lluvia</th></tr>';
-            table.appendChild(thead);
-
-            // Cuerpo
-            const tbody = document.createElement('tbody');
-            console.log(dia)
-            dia.horas.forEach(h => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-            <td>${h.hora}</td>
-            <td>${h.temp ?? '-'}</td>
-            <td>${h.humedad ?? '-'}</td>
-            <td>${h.presionMb ?? '-'}</td>
-            <td>${h.vientoKph ?? '-'}</td>
-            <td>${h.lluvia ?? '-'}</td>
-          `;
-                tbody.appendChild(tr);
-            });
-            table.appendChild(tbody);
-            wrapper.appendChild(table);
-            body.appendChild(wrapper);
-            card.appendChild(body);
-            cont.appendChild(card);
-        });
-    }
-
-    function renderPaginacion(page, pages) {
-        const pag = document.getElementById('paginacion');
-        pag.innerHTML = '';
-
-        const createItem = (p, label = p, disabled = false, active = false) => {
-            const li = document.createElement('li');
-            li.className = `page-item ${disabled?'disabled':''} ${active?'active':''}`;
-            const a = document.createElement('a');
-            a.className = 'page-link';
-            a.href = '#';
-            a.textContent = label;
-            if (!disabled && !active) a.onclick = e => { e.preventDefault(); buscarDatos(p); };
-            li.appendChild(a);
-            return li;
+        const actualizarEstado = (texto, activo) => {
+            estadoEl.textContent = `Estado: ${texto}`;
+            estadoEl.classList.toggle('text-success', activo);
+            estadoEl.classList.toggle('text-danger', !activo);
+            estadoActivo = activo;
         };
 
-        // Prev
-        pag.appendChild(createItem(page-1, '«', page===1));
-        // Números
-        for (let p = 1; p <= pages; p++) {
-            pag.appendChild(createItem(p, p, false, p===page));
-        }
-        // Next
-        pag.appendChild(createItem(page+1, '»', page===pages));
-    }
+        const mostrarLecturaActual = async () => {
+            if (!estadoActivo) return;
+            try {
+                const res = await fetch("/lecturas/arduino");
+                const { lectura_actual } = await res.json();
 
-    // arranca el polling
-    setInterval(obtenerLectura, 2000);
+                document.getElementById('temp').textContent = lectura_actual.temperatura ?? '-';
+                document.getElementById('hum').textContent = lectura_actual.humedad ?? '-';
+                document.getElementById('pres').textContent = lectura_actual.presion ?? '-';
+                document.getElementById('viento').textContent = lectura_actual.viento ?? '-';
+                document.getElementById('lluvia').textContent = lectura_actual.lluvia ?? '-';
+
+                const hora = new Date(lectura_actual.timestamp);
+                document.getElementById('hora').textContent = isNaN(hora) ? '-' : hora.toLocaleString();
+            } catch {
+                ['temp','hum','pres','viento','lluvia','hora'].forEach(id => document.getElementById(id).textContent = '-');
+            }
+        };
+
+        const postAccion = async (url, textoOk, activo) => {
+            try {
+                const res = await fetch(url, { method: 'POST' });
+                if (!res.ok) throw new Error();
+                actualizarEstado(textoOk, activo);
+                btnIniciar.disabled = activo;
+                btnDetener.disabled = !activo;
+            } catch {
+                alert(`Error al ${activo ? 'iniciar' : 'detener'} la lectura`);
+            }
+        };
+
+        const mostrarClimaHistorico = async (pagina = 1) => {
+            try {
+                const res = await fetch(`/search?page=${pagina}`);
+                const data = await res.json();
+                renderResultados(data);
+                renderPaginacion(data.page, data.pages);
+                paginaActual = data.page;
+            } catch {
+                alert("Error cargando datos históricos");
+            }
+        };
+
+        const renderResultados = ({ ciudad, region, pais, lecturas }) => {
+            const cont = document.getElementById('resultados');
+            cont.innerHTML = `<h2>Clima en ${ciudad}, ${region} (${pais})</h2>`;
+            lecturas.forEach(({ fecha, horas }) => {
+                const rows = horas.map(h =>
+                    `<tr>
+          <td>${h.hora}</td>
+          <td>${h.temp ?? '-'}</td>
+          <td>${h.humedad ?? '-'}</td>
+          <td>${h.presionMb ?? '-'}</td>
+          <td>${h.vientoKph ?? '-'}</td>
+          <td>${h.lluvia ?? '-'}</td>
+        </tr>`).join('');
+
+                cont.innerHTML += `
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">${fecha}</h5>
+            <div class="table-responsive">
+              <table class="table table-sm table-striped">
+                <thead>
+                  <tr><th>Hora</th><th>Temp (°C)</th><th>Humedad (%)</th><th>Presión</th><th>Viento</th><th>Lluvia</th></tr>
+                </thead>
+                <tbody>${rows}</tbody>
+              </table>
+            </div>
+          </div>
+        </div>`;
+            });
+        };
+
+        const renderPaginacion = (actual, total) => {
+            const pag = document.getElementById('paginacion');
+            pag.innerHTML = '';
+
+            const crearItem = (pagina, texto, deshabilitado, activa) => {
+                const li = document.createElement('li');
+                li.className = `page-item ${deshabilitado ? 'disabled' : ''} ${activa ? 'active' : ''}`;
+                const a = document.createElement('a');
+                a.className = 'page-link';
+                a.href = '#';
+                a.textContent = texto;
+                if (!deshabilitado && !activa) {
+                    a.addEventListener('click', e => {
+                        e.preventDefault();
+                        mostrarClimaHistorico(pagina);
+                    });
+                }
+                li.appendChild(a);
+                return li;
+            };
+
+            pag.appendChild(crearItem(actual - 1, '«', actual === 1));
+            for (let i = 1; i <= total; i++) {
+                pag.appendChild(crearItem(i, i, false, i === actual));
+            }
+            pag.appendChild(crearItem(actual + 1, '»', actual === total));
+        };
+
+        // Eventos
+        btnIniciar.onclick = () => postAccion("/lecturas/iniciar", "leyendo...", true);
+        btnDetener.onclick = () => postAccion("/lecturas/detener", "detenido", false);
+        btnBuscar.onclick = () => mostrarClimaHistorico();
+
+        // Actualización automática cada 2 segundos
+        setInterval(mostrarLecturaActual, 2000);
+    })();
 </script>
+
 </body>
 </html>

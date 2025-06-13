@@ -4,15 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f1a78953-03c7-49c8-b3fa-a8033c13d48c" name="Changes" comment="cambios finales">
-      <change afterPath="$PROJECT_DIR$/src/controllers/lecturasController.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/procesador.js" afterDir="false" />
+    <list default="true" id="f1a78953-03c7-49c8-b3fa-a8033c13d48c" name="Changes" comment="cambios finales (falta prubas)">
+      <change afterPath="$PROJECT_DIR$/Arduino.ino" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ml/entrenar_lstm.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ml/entrenar_modelo.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ml/modelo_temperatura.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ml/predecir.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ml/predecir_lstm.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/weatherController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/weatherController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/archivoService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/archivoService.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/serialService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/serialService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/weatherService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/weatherService.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +69,8 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Node.js.app.js.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.config.js.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.test.js.executor&quot;: &quot;Run&quot;,
     &quot;Python.entrenar_lstm.executor&quot;: &quot;Run&quot;,
     &quot;Python.entrenar_modelo.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -99,6 +106,12 @@
   </component>
   <component name="RunManager" selected="Node.js.app.js">
     <configuration name="app.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/app.js" working-dir="$PROJECT_DIR$/src">
+      <method v="2" />
+    </configuration>
+    <configuration name="config.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/config.js" working-dir="$PROJECT_DIR$/src">
+      <method v="2" />
+    </configuration>
+    <configuration name="test.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/test.js" working-dir="$PROJECT_DIR$/src">
       <method v="2" />
     </configuration>
     <configuration name="entrenar_lstm" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -148,6 +161,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Node.js.app.js" />
+        <item itemvalue="Node.js.config.js" />
+        <item itemvalue="Node.js.test.js" />
       </list>
     </recent_temporary>
   </component>
@@ -190,7 +205,10 @@
       <workItem from="1749487991560" duration="7227000" />
       <workItem from="1749505631533" duration="2651000" />
       <workItem from="1749514140611" duration="703000" />
-      <workItem from="1749691438220" duration="7610000" />
+      <workItem from="1749691438220" duration="8045000" />
+      <workItem from="1749753898562" duration="4139000" />
+      <workItem from="1749758835999" duration="2993000" />
+      <workItem from="1749768465732" duration="2234000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -248,7 +266,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749566598751</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="cambios finales (falta prubas)">
+      <option name="closed" value="true" />
+      <created>1749700156477</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1749700156477</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -276,6 +302,7 @@
     <MESSAGE value="first commit" />
     <MESSAGE value="cambios (faltan pruebas)" />
     <MESSAGE value="cambios finales" />
-    <option name="LAST_COMMIT_MESSAGE" value="cambios finales" />
+    <MESSAGE value="cambios finales (falta prubas)" />
+    <option name="LAST_COMMIT_MESSAGE" value="cambios finales (falta prubas)" />
   </component>
 </project>

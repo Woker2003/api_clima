@@ -5,8 +5,29 @@ const path = require("path");
 const csvPath = path.join(__dirname, "..", "data", "historial.csv");
 const jsonPath = path.join(__dirname, "..", "data", "clima.json");
 
+// Conjunto que almacenará claves únicas para evitar duplicados en CSV
+const clavesExistentes = cargarClavesDesdeCSV();
+
 /**
- * Guarda una lectura en formato CSV, creando encabezado si no existe.
+ * Lee el archivo CSV y obtiene un Set con claves únicas (fecha + hora).
+ * Esto evita guardar lecturas duplicadas.
+ * @returns {Set<string>} - Claves existentes en el CSV actual.
+ */
+function cargarClavesDesdeCSV() {
+    const claves = new Set();
+    if (!fs.existsSync(csvPath)) return claves;
+
+    const lineas = fs.readFileSync(csvPath, "utf-8").trim().split("\n").slice(1); // Ignorar encabezado
+    for (const linea of lineas) {
+        const [fecha, hora] = linea.split(",");
+        claves.add(`${fecha} ${hora}`);
+    }
+    return claves;
+}
+
+/**
+ * Guarda una lectura en formato CSV, evitando duplicados (fecha + hora).
+ * Crea el archivo con encabezado si no existe.
  * @param {string} fecha - Fecha de la lectura (YYYY-MM-DD).
  * @param {object} data - Objeto con propiedades hora,temp,humedad,presionMb,vientoKph,lluvia,nubes.
  */
@@ -14,11 +35,15 @@ function guardarLecturaCSV(fecha, data) {
     const linea = `${fecha},${data.hora},${data.temp},${data.humedad},${data.presionMb},${data.vientoKph},${data.lluvia},${data.nubes}\n`;
     const encabezado = "fecha,hora,temperatura,humedad,presion,viento,lluvia,nubes\n";
 
+    const clave = `${fecha} ${data.hora}`;
+    if (clavesExistentes.has(clave)) return; // Evita guardar duplicado
+
     if (!fs.existsSync(csvPath)) {
         fs.writeFileSync(csvPath, encabezado);
     }
 
     fs.appendFileSync(csvPath, linea);
+    clavesExistentes.add(clave); // Añadir clave al Set para futuros chequeos
 }
 
 /**
